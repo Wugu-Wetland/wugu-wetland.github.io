@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap');
+
+:root {
+  --clr-dark-green: #405935; --clr-mid-green: #7a9e6e;
+  --clr-light-green: #c8d9b8; --clr-bg-green: #e8f0e0;
+  --clr-pale: #f3f7ee; --clr-sand: #d4c9a8;
+  --clr-slate-blue: #6b8fa3; --clr-white: #ffffff;
+  --clr-text: #2c3a28; --clr-text-muted: #5a6e52;
+  --clr-btn-bg: #405935; --clr-btn-hover: #2e4027;
+  --radius-blob: 60% 40% 55% 45% / 50% 45% 55% 50%;
+  --transition-base: 0.3s ease;
+  --font-heading: 'Noto Serif TC', 'Georgia', serif;
+  --font-body: 'Noto Sans TC', 'PingFang TC', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--font-body); color: var(--clr-text); background: var(--clr-white); overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+
+.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.container--wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 22px; border-radius: 999px;
+  background: var(--clr-btn-bg); color: var(--clr-white);
+  font-size: 1rem; font-family: var(--font-body); font-weight: 500;
+  cursor: pointer; border: none; transition: background var(--transition-base), transform var(--transition-base);
+}
+.btn:hover { background: var(--clr-btn-hover); transform: translateY(-1px); }
+.btn--outline { background: transparent; color: var(--clr-dark-green); border: 1.5px solid var(--clr-dark-green); }
+.btn--outline:hover { background: var(--clr-dark-green); color: var(--clr-white); }
+.btn--outline-light { background: transparent; color: var(--clr-white); border: 1.5px solid var(--clr-white); }
+.btn--outline-light:hover { background: var(--clr-white); color: #ffffff00; }
+
+.section-title { font-family: var(--font-heading); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--clr-dark-green); font-weight: 700; }
+.divider { border: none; border-top: 2px solid var(--clr-dark-green); margin: 12px 0 24px; }
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* NAVBAR */
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  background: rgba(232, 240, 224, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  padding: 0 32px; display: flex; align-items: center; justify-content: space-between;
+  height: 64px; box-shadow: 0 1px 6px rgba(64,89,53,0.1);
+}
+.navbar__logo { display: flex; align-items: center; gap: 8px; }
+.navbar__actions { display: flex; align-items: center; gap: 10px; }
+.navbar__ext-link {
+  padding: 7px 16px; border-radius: 999px; border: 1.5px solid var(--clr-dark-green);
+  font-size: 1rem; color: var(--clr-dark-green); transition: all var(--transition-base); white-space: nowrap;
+}
+.navbar__ext-link:hover { background: var(--clr-dark-green); color: var(--clr-white); }
+
+.navbar__hamburger {
+  width: 36px; height: 36px; background: none; border: none; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 4px;
+  border-radius: 6px; transition: background var(--transition-base);
+}
+.navbar__hamburger:hover { background: rgba(64,89,53,0.1); }
+.navbar__hamburger span { display: block; height: 2px; background: var(--clr-dark-green); border-radius: 2px; transition: all 0.3s ease; }
+.navbar__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.navbar__hamburger.open span:nth-child(2) { opacity: 0; }
+.navbar__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-drawer {
+  position: fixed; top: 64px; left: 0; right: 0; background: var(--clr-bg-green);
+  max-height: 0; overflow: hidden; transition: max-height 0.35s ease, box-shadow 0.3s; z-index: 99;
+}
+.nav-drawer.open { max-height: 500px; box-shadow: 0 8px 20px rgba(64,89,53,0.12); }
+.nav-drawer__list { list-style: none; padding: 12px 0 20px; text-align: right; }
+.nav-drawer__list li a { display: block; padding: 12px 32px; font-size: 1rem; color: var(--clr-dark-green); font-weight: 500; transition: background var(--transition-base); }
+.nav-drawer__list li a:hover { background: rgba(64,89,53,0.08); }
+
+/* FOOTER */
+.footer { background: var(--clr-bg-green); padding: 48px 24px 32px; text-align: center; position: relative; }
+.footer__logo { height: 56px; margin: 0 auto 20px; display: block; }
+.footer__info { font-size: 1rem; color: var(--clr-text-muted); line-height: 2; margin-bottom: 20px; }
+.footer__info a:hover { color: var(--clr-mid-green); }
+.footer__socials { display: flex; gap: 12px; justify-content: center; margin-bottom: 24px; }
+.footer__social-btn {
+  width: 38px; height: 38px; border-radius: 50%; background: var(--clr-dark-green); color: var(--clr-white);
+  display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all var(--transition-base); text-decoration: none;
+}
+.footer__social-btn:hover { background: var(--clr-btn-hover); transform: translateY(-2px); }
+.footer__copy { font-size: 0.75rem; color: var(--clr-text-muted); }
+
+/* BACK TO TOP */
+.back-to-top {
+  position: fixed; bottom: 28px; right: 24px; z-index: 50; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--clr-dark-green); color: var(--clr-white); border: none; cursor: pointer; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(64,89,53,0.3);
+  opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s;
+}
+.back-to-top.visible { opacity: 1; pointer-events: all; }
+.back-to-top:hover { transform: translateY(-3px); }
+
+/* RWD */
+@media (min-width: 769px) { .mobile-only { display: none; } }
+@media (max-width: 768px) { .desktop-only { display: none; } .mobile-only { display: block; } .navbar { padding: 0 16px; } }

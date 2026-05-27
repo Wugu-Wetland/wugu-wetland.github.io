@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>關於五股濕地 | 五股濕地生態園區</title>
+  <meta name="description" content="認識五股濕地生態園區——國家級重要濕地的地理位置、歷史沿革與託管關係，守護城市中珍貴的自然生態系統。" />
+  <meta property="og:title" content="關於五股濕地 | 五股濕地生態園區" />
+  <meta property="og:description" content="國家級重要濕地，守護城市中的自然寶地。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/og-about.webp" />
+
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+
+  <link rel="stylesheet" href="styles/shared.css" />
+  <link rel="stylesheet" href="styles/about.css" />
+  
+  <!-- 新增：預先載入首屏最關鍵的圖片，提升 LCP 速度 -->
+  <!-- 注意：請在後端或打包工具先轉出一份 .webp 檔案 -->
+  <link rel="preload" as="image" href="images/index-slides-1.webp" type="image/webp" fetchpriority="high">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar" role="navigation" aria-label="主要導覽">
+      <a class="navbar__logo" href="index.html" aria-label="五股濕地生態園區 首頁">
+        <img src="images/logo-green.webp" alt="" width="200" height="44" />
+      </a>
+      <div class="navbar__actions">
+        <a href="https://www.sow.org.tw/event/search?title=%E4%BA%94%E8%82%A1%E6%BF%95%E5%9C%B0" class="navbar__ext-link desktop-only" aria-label="參與活動" target="_blank">參與活動</a>
+        <a href="https://www.sow.org.tw" class="navbar__ext-link desktop-only" aria-label="荒野官網" target="_blank">荒野官網</a>
+        <button class="navbar__hamburger" id="hamburger-btn" aria-expanded="false" aria-controls="nav-drawer" aria-label="開啟選單">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="nav-drawer" id="nav-drawer" role="menu">
+      <ul class="nav-drawer__list">
+        <li><a href="index.html" role="menuitem">首頁</a></li>
+        <li><a href="javascript:void(0)" role="menuitem">關於五股濕地</a></li>
+        <li><a href="environment.html" role="menuitem">生態環境</a></li>
+        <li><a href="https://scratch.mit.edu/projects/1315380063/fullscreen/" role="menuitem" target="_blank">互動遊戲</a></li>
+         <!--<li><a href="javascript:void(0)" role="menuitem">特色物種</a></li>-->
+        <!--<li><a href="javascript:void(0)" role="menuitem">棲地工作</a></li>-->
+        <!--<li><a href="javascript:void(0)" role="menuitem">年度時程</a></li>-->
+        <!--<li><a href="javascript:void(0)" role="menuitem">網路相簿</a></li>-->
+        <li class="mobile-only"><a href="https://www.sow.org.tw" role="menuitem" style="border-top: 1px solid var(--clr-light-green); margin-top: 10px;" target="_blank">荒野官網</a></li>
+        <li class="mobile-only"><a href="https://www.sow.org.tw/event/search?title=%E4%BA%94%E8%82%A1%E6%BF%95%E5%9C%B0" role="menuitem" target="_blank">參與活動</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="about-page-main">
+    <!-- ABOUT-HERO -->
+    <section class="about-hero reveal" aria-label="五股濕地主視覺">
+      <div class="about-hero__img-wrap">
+        <img class="about-hero__img" src="images/about-hero-1.webp" alt="五股濕地空景——廣闊蘆葦叢與水面在晨光中延伸" />
+      </div>
+      <div class="about-hero__wave" aria-hidden="true">
+        <img src="images/about-curve-1.webp" alt="">
+      </div>
+    </section>
+
+    <!-- ABOUT-INTRO -->
+    <section class="about-intro" id="about-intro" aria-labelledby="about-intro-heading">
+      <div class="about-intro__inner reveal">
+        <h1 class="about-intro__h1" id="about-intro-heading">關於五股濕地：國家級重要濕地</h1>
+        <hr class="about-intro__divider" />
+        <p class="about-intro__body">內容簡介內容簡介內容簡介...</p>
+        <p class="about-intro__body">內容簡介內容簡介內容簡介...</p>
+      </div>
+    </section>
+
+    <!-- ABOUT-GEO + ABOUT-HISTORY -->
+    <section class="about-content-section" id="about-geo" aria-labelledby="about-geo-heading">
+      <div class="about-content-section__wave-top" aria-hidden="true">
+        <svg viewBox="0 0 1440 52" preserveAspectRatio="none"><path d="M0,52 C360,4 1080,4 1440,52 L1440,0 L0,0 Z" fill="#ffffff" /></svg>
+      </div>
+
+      <div class="about-content-section__inner">
+        <div class="about-content-section__text-col">
+          <div class="about-geo reveal">
+            <h2 class="about-geo__title" id="about-geo-heading">地理位置介紹</h2>
+            <hr class="about-geo__divider" />
+            <p>內容簡介內容簡介內容簡介...</p>
+          </div>
+          <div class="about-history reveal" id="about-history" style="transition-delay: 0.1s;" aria-labelledby="about-history-heading">
+            <h2 class="about-history__title" id="about-history-heading">歷史介紹</h2>
+            <hr class="about-history__divider" />
+            <p>內容簡介內容簡介內容簡介...</p>
+          </div>
+        </div>
+        <div class="about-content-section__img-col reveal" style="transition-delay: 0.15s;" aria-hidden="true">
+          <div class="about-content-section__img-wrap">
+            <img src="images/about-wetland-side.webp" alt="五股濕地蘆葦叢與鳥群" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <div class="about-content-section__wave-bottom" aria-hidden="true">
+        <svg viewBox="0 0 1440 52" preserveAspectRatio="none"><path d="M0,0 C360,48 1080,48 1440,0 L1440,52 L0,52 Z" fill="#ffffff" /></svg>
+      </div>
+    </section>
+
+    <!-- ABOUT-MANAGEMENT -->
+    <section class="about-management" id="about-management" aria-labelledby="about-mgmt-left-title">
+      <div class="about-management__header reveal">
+        <h2 class="about-management__col-title" id="about-mgmt-left-title">託管關係簡述</h2>
+        <h2 class="about-management__col-title" id="about-mgmt-right-title">交通方式</h2>
+      </div>
+      <div class="about-management__panels reveal" style="transition-delay: 0.1s;">
+        <div class="about-management__panel about-management__panel--left" aria-labelledby="about-mgmt-left-title">
+          <p>內容簡介內容簡介內容簡介...</p>
+        </div>
+        <div class="about-management__panel about-management__panel--right" aria-labelledby="about-mgmt-right-title">
+          <p>內容簡介內容簡介內容簡介...</p>
+          <div class="about-management__panel-cta">
+            <a href="https://maps.app.goo.gl/PuJw7zFUjeeEWEgE9" class="btn" aria-label="開啟 Google 地圖連結" target="_blank" rel="noopener noreferrer">地圖連結 &nbsp;❯</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT-MAP -->
+    <section class="about-map" id="about-map" aria-labelledby="about-map-heading">
+      <div class="about-map__header reveal">
+        <h2 class="about-map__title" id="about-map-heading">互動地圖</h2>
+        <hr class="about-map__divider" />
+      </div>
+      <div class="about-map__container-wrap reveal" style="transition-delay: 0.1s;">
+        <div class="about-map__container" id="about-map-container" tabindex="0" role="img" aria-label="互動地圖預覽">
+          <img class="about-map__img" src="images/map.webp" alt="五股濕地區域地圖" loading="lazy" />
+          <div class="about-map__marker about-map__marker--1" role="button" tabindex="0" aria-label="標記點 1" title="觀察點 1"><div class="about-map__marker-pin" aria-hidden="true"></div></div>
+          <div class="about-map__marker about-map__marker--2" role="button" tabindex="0" aria-label="標記點 2" title="觀察點 2"><div class="about-map__marker-pin" aria-hidden="true"></div></div>
+          <div class="about-map__marker about-map__marker--3" role="button" tabindex="0" aria-label="標記點 3" title="觀察點 3"><div class="about-map__marker-pin" aria-hidden="true"></div></div>
+          <div class="about-map__marker about-map__marker--4" role="button" tabindex="0" aria-label="標記點 4" title="觀察點 4"><div class="about-map__marker-pin" aria-hidden="true"></div></div>
+          <div class="about-map__marker about-map__marker--5" role="button" tabindex="0" aria-label="標記點 5" title="觀察點 5"><div class="about-map__marker-pin" aria-hidden="true"></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <svg style="position:absolute;top:-120px;left:0;right:0;width:100%;" viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,110 C 360,130 360,40 720,80 C 1080,120 1080,10 1440,30 L1440,200 L0,200 Z" fill="#E9F0E1"/>
+    </svg>
+    <img class="footer__logo" aria-label="五股濕地生態園區 Logo" src="images/logo-green.webp" alt="" loading="lazy" />
+    <address class="footer__info" style="font-style:normal;">
+      地址：<a href="https://maps.app.goo.gl/PuJw7zFUjeeEWEgE9" target="_blank">新北市蘆洲區 成蘆大橋下方</a><br />
+      信箱：<a href="mailto:sowtpe07@wilderness.tw" target="_blank">sowtpe07@wilderness.tw</a><br /><br />
+      <a href="https://www.hrcm.ntpc.gov.tw/HtmlPageDetail/%E4%BA%94%E8%82%A1%E6%BF%95%E5%9C%B0" target="_blank">高灘地工程管理處</a>｜<a href="https://www.hrcmntmp.ntpc.gov.tw/facility-detail?id=baea2841-a0de-4f87-a1c0-925fd7c9f307" target="_blank">新北大都會公園</a>
+    </address>
+    <nav class="footer__socials" aria-label="社群媒體連結">
+      <a href="#" class="footer__social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#" class="footer__social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="#" class="footer__social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#405A35"/></svg></a>
+    </nav>
+    <p class="footer__copy">© 2026 五股濕地生態園區 · <a href="https://www.sow.org.tw" target="_blank">荒野保護協會</a></p>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="回到頂部">▲</button>
+
+  <script src="script/shared.js"></script>
+  <script src="script/about.js"></script>
+</body>
+</html>

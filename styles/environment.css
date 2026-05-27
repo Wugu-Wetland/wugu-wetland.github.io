@@ -1,0 +1,199 @@
+/* ============================================================
+   ENVIRONMENT.CSS — 五股濕地生態園區 生態環境頁面專屬樣式
+   Namespace: .env-* (嚴禁覆寫 shared.css 的全域 class)
+   ============================================================ */
+
+/* ============================================================
+   MAIN CONTAINER & BACKGROUND BLOBS
+   ============================================================ */
+.environment-main {
+  padding-top: 120px; /* 避開 Fixed Navbar 64px + 緩衝間距 */
+  padding-bottom: 80px;
+  background-color: var(--clr-pale); /* 延續專案的淺底色 */
+  position: relative;
+  overflow: hidden;
+}
+
+/* 設計稿底部的沙色/綠色裝飾色塊 */
+.env-bg-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.env-shape {
+  position: absolute;
+  border-radius: var(--radius-blob);
+  filter: blur(1px);
+}
+
+.env-shape--1 {
+  width: 60vw; height: 60vw;
+  background: rgba(212, 201, 168, 0.2); /* 借用 var(--clr-sand) 透明度 */
+  top: -10%; left: -20%;
+}
+
+.env-shape--2 {
+  width: 70vw; height: 50vw;
+  background: rgba(200, 217, 184, 0.3); /* 借用 var(--clr-light-green) 透明度 */
+  top: 40%; right: -30%;
+}
+
+.env-shape--3 {
+  width: 80vw; height: 40vw;
+  background: rgba(212, 201, 168, 0.25);
+  bottom: -5%; left: -10%;
+}
+
+/* ============================================================
+   ENVIRONMENT SECTION (水域、灘地、陸地 共用卡片結構)
+   ============================================================ */
+.env-section {
+  position: relative;
+  max-width: 1040px;
+  width: 92%;
+  margin: 0 auto 64px;
+  background: linear-gradient(180deg, #d8f0ff 0%, #f4fafe 100%); /* 設計稿的漸層藍天 */
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(64,89,53,0.08);
+  z-index: 1;
+}
+
+/* ──────────────────────────────────────────────
+   SCENERY (背景圖層：雲朵與丘陵)
+   ────────────────────────────────────────────── */
+.env-section__scenery {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 雲朵定位與微動態 */
+.env-cloud {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  animation: cloud-float 20s linear infinite alternate;
+}
+
+.env-cloud--left {
+  top: 15%;
+  left: 5%;
+  width: 160px;
+  animation-duration: 25s;
+}
+
+.env-cloud--right {
+  top: 25%;
+  right: 15%;
+  width: 140px;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes cloud-float {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(30px); }
+}
+
+/* 底部丘陵 SVG 定位 */
+.env-hills {
+  position: absolute;
+  bottom: -2px; /* 避免接縫白邊 */
+  left: 0;
+  width: 100%;
+  height: 180px; /* 控制丘陵高度 */
+}
+
+/* ──────────────────────────────────────────────
+   CONTENT (內容圖層：標題與文字)
+   ────────────────────────────────────────────── */
+.env-section__inner {
+  position: relative;
+  z-index: 2; /* 確保文字在山丘與雲朵之上 */
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  padding: 64px 48px 140px; /* 底部 padding 留給丘陵空間 */
+}
+
+/* 左欄：大標題 */
+.env-section__title-col {
+  padding-top: 12px;
+}
+
+.env-section__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--clr-text);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* 右欄：內文 */
+.env-section__content-col {
+  /* 在設計稿中文字是直接壓在背景上，但為了 RWD 可讀性，給予極淡的玻璃效果 */
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 32px;
+  border-radius: 16px;
+}
+
+.env-section__subtitle {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.env-section__content-col p {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--clr-text-muted); /* 延續專案文字顏色 */
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.env-section__content-col p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN
+   ============================================================ */
+@media (max-width: 860px) {
+  .env-section__inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 48px 32px 160px;
+  }
+  
+  .env-section__title-col {
+    text-align: center;
+  }
+
+  .env-cloud--left { width: 100px; left: -10px; }
+  .env-cloud--right { width: 90px; right: 0; }
+  .env-hills { height: 140px; }
+}
+
+@media (max-width: 480px) {
+  .environment-main {
+    padding-top: 90px;
+  }
+  .env-section {
+    border-radius: 16px;
+    margin-bottom: 40px;
+  }
+  .env-section__inner {
+    padding: 32px 20px 140px;
+  }
+  .env-section__content-col {
+    padding: 24px 16px;
+  }
+}

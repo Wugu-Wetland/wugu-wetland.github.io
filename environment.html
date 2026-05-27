@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>生態環境 | 五股濕地生態園區</title>
+  <meta name="description" content="探索五股濕地豐富的生態環境，包含水域、灘地與陸地等多元棲地，孕育無數珍貴物種。" />
+  <meta property="og:title" content="生態環境 | 五股濕地生態園區" />
+  <meta property="og:description" content="探索五股濕地豐富的生態環境，包含水域、灘地與陸地等多元棲地。" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+  
+  <link rel="stylesheet" href="styles/shared.css" />
+  <link rel="stylesheet" href="styles/environment.css" />
+  
+  <!-- 新增：預先載入首屏最關鍵的圖片，提升 LCP 速度 -->
+  <!-- 注意：請在後端或打包工具先轉出一份 .webp 檔案 -->
+  <link rel="preload" as="image" href="images/index-slides-1.webp" type="image/webp" fetchpriority="high">
+</head>
+<body>
+
+  <!-- =====================================================
+       NAVBAR (完全沿用既有結構，不隨設計稿更動)
+       ===================================================== -->
+  <header>
+    <nav class="navbar" role="navigation" aria-label="主要導覽">
+      <a class="navbar__logo" href="index.html" aria-label="五股濕地生態園區 首頁">
+        <img src="images/logo-green.webp" alt="" width="200" height="44" />
+      </a>
+      <div class="navbar__actions">
+        <a href="https://www.sow.org.tw/event/search?title=%E4%BA%94%E8%82%A1%E6%BF%95%E5%9C%B0" class="navbar__ext-link desktop-only" aria-label="參與活動" target="_blank">參與活動</a>
+        <a href="https://www.sow.org.tw" class="navbar__ext-link desktop-only" aria-label="荒野官網" target="_blank">荒野官網</a>
+        <button class="navbar__hamburger" id="hamburger-btn" aria-expanded="false" aria-controls="nav-drawer" aria-label="開啟選單">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="nav-drawer" id="nav-drawer" role="menu">
+      <ul class="nav-drawer__list">
+        <li><a href="index.html" role="menuitem">首頁</a></li>
+        <li><a href="about.html" role="menuitem">關於五股濕地</a></li>
+        <!-- 當前頁面設為 void(0) -->
+        <li><a href="javascript:void(0)" role="menuitem">生態環境</a></li>
+        <li><a href="https://scratch.mit.edu/projects/1315380063/fullscreen/" role="menuitem" target="_blank">互動遊戲</a></li>
+         <!--<li><a href="javascript:void(0)" role="menuitem">特色物種</a></li>-->
+        <!--<li><a href="javascript:void(0)" role="menuitem">棲地工作</a></li>-->
+        <!--<li><a href="javascript:void(0)" role="menuitem">年度時程</a></li>-->
+        <!--<li><a href="javascript:void(0)" role="menuitem">網路相簿</a></li>-->
+        <li class="mobile-only"><a href="https://www.sow.org.tw" role="menuitem" style="border-top: 1px solid var(--clr-light-green); margin-top: 10px;" target="_blank">荒野官網</a></li>
+        <li class="mobile-only"><a href="https://www.sow.org.tw/event/search?title=%E4%BA%94%E8%82%A1%E6%BF%95%E5%9C%B0" role="menuitem" target="_blank">參與活動</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="environment-main">
+    
+    <!-- 全域背景裝飾 (還原設計稿中的背景色塊) -->
+    <div class="env-bg-shapes" aria-hidden="true">
+      <div class="env-shape env-shape--1"></div>
+      <div class="env-shape env-shape--2"></div>
+      <div class="env-shape env-shape--3"></div>
+    </div>
+
+    <!-- =====================================================
+         環境區塊 1：水域
+         ===================================================== -->
+    <section class="env-section reveal" id="env-water" aria-labelledby="env-water-title">
+      <!-- 背景圖層 (天空與丘陵) -->
+      <div class="env-section__scenery" aria-hidden="true">
+        <!-- 雲朵 -->
+        <svg class="env-cloud env-cloud--left" viewBox="0 0 100 60"><path d="M20,60 a20,20 0 0,1 0,-40 a20,20 0 0,1 30,-10 a25,25 0 0,1 40,20 a15,15 0 0,1 0,30 z" fill="#ffffff" opacity="0.9"/></svg>
+        <svg class="env-cloud env-cloud--right" viewBox="0 0 100 60"><path d="M20,60 a20,20 0 0,1 0,-40 a20,20 0 0,1 30,-10 a25,25 0 0,1 40,20 a15,15 0 0,1 0,30 z" fill="#ffffff" opacity="0.9"/></svg>
+        <!-- 丘陵與動物點綴 -->
+        <svg class="env-hills" viewBox="0 0 1200 240" preserveAspectRatio="none">
+          <path d="M0,120 C300,200 400,60 700,120 C900,160 1000,80 1200,100 L1200,240 L0,240 Z" fill="var(--clr-light-green)"/>
+          <path d="M0,160 C250,80 500,220 800,130 C1000,70 1100,160 1200,140 L1200,240 L0,240 Z" fill="var(--clr-mid-green)"/>
+          <!-- 小動物 (簡單幾何代替) -->
+          <circle cx="150" cy="150" r="3" fill="#ffffff" />
+          <rect x="146" y="152" width="8" height="6" fill="#ffffff" rx="2" />
+        </svg>
+      </div>
+
+      <!-- 內容圖層 -->
+      <div class="env-section__inner">
+        <div class="env-section__title-col">
+          <h2 class="env-section__title" id="env-water-title">水域</h2>
+        </div>
+        <div class="env-section__content-col">
+          <h3 class="env-section__subtitle">文字文字文字文字文字文字</h3>
+          <p>五股溼地的水域主要由大生態池與塭仔圳組成，受到潮汐、水位變化與人工棲地改造影響，形成多樣的濕地水域生態。</p>
+          <p>大生態池原本是釣魚池，經過棲地改造後，增設淺灘與緩坡，提供鳥類棲息與覓食空間，曾吸引大量黑腹濱鷸、東方環頸鴴及雁鴨科鳥類在此活動。</p>
+          <p>水域周邊可觀察到多種濕地生物，例如弧邊管招潮、台灣厚蟹、台灣泥蟹及無齒膛臂蟹等螃蟹，也常有鷺科與鷸鴴科鳥類出沒。</p>
+          <p>塭仔圳具有悠久歷史，早期曾是運河與灌溉水道，現今則成為五股溼地重要的潮汐水域，漲退潮會影響整體濕地生態與生物棲息環境。</p>
+          <p>近年因蘆葦擴張、泥沙淤積及外來植物蔓延，部分水域逐漸陸化，影響生物棲息空間；此外，潮水流動與水位變化也會牽動濕地生態平衡與物種生存。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         環境區塊 2：灘地
+         ===================================================== -->
+    <section class="env-section reveal" id="env-mudflat" aria-labelledby="env-mudflat-title" style="transition-delay: 0.1s;">
+      <div class="env-section__scenery" aria-hidden="true">
+        <svg class="env-cloud env-cloud--left" viewBox="0 0 100 60"><path d="M20,60 a20,20 0 0,1 0,-40 a20,20 0 0,1 30,-10 a25,25 0 0,1 40,20 a15,15 0 0,1 0,30 z" fill="#ffffff" opacity="0.9"/></svg>
+        <svg class="env-cloud env-cloud--right" viewBox="0 0 100 60"><path d="M20,60 a20,20 0 0,1 0,-40 a20,20 0 0,1 30,-10 a25,25 0 0,1 40,20 a15,15 0 0,1 0,30 z" fill="#ffffff" opacity="0.9"/></svg>
+        <svg class="env-hills" viewBox="0 0 1200 240" preserveAspectRatio="none">
+          <path d="M0,120 C300,200 400,60 700,120 C900,160 1000,80 1200,100 L1200,240 L0,240 Z" fill="var(--clr-light-green)"/>
+          <path d="M0,160 C250,80 500,220 800,130 C1000,70 1100,160 1200,140 L1200,240 L0,240 Z" fill="var(--clr-mid-green)"/>
+          <circle cx="150" cy="150" r="3" fill="#ffffff" />
+          <rect x="146" y="152" width="8" height="6" fill="#ffffff" rx="2" />
+        </svg>
+      </div>
+
+      <div class="env-section__inner">
+        <div class="env-section__title-col">
+          <h2 class="env-section__title" id="env-mudflat-title">灘地</h2>
+        </div>
+        <div class="env-section__content-col">
+          <h3 class="env-section__subtitle">文字文字文字文字文字文字</h3>
+          <p>五股溼地的灘地主要分布於疏洪沼澤公園、疏洪圳邊公園及疏洪生態公園，受到潮汐、水流與泥沙堆積影響，形成多樣的濕地生態環境。</p>
+          <p>灘地是許多生物的重要棲地，常可見小水鴨、鷺科、鷸鴴科鳥類，以及無齒膛臂蟹、紅螯膛臂蟹、大彈塗魚等生物在此覓食與活動。</p>
+          <p>過去灘地面積廣大，退潮時可觀察到大量螃蟹與水鳥聚集，但近年因蘆葦快速生長、泥沙淤積及布袋蓮蔓延，導致灘地逐漸陸化、面積縮小。</p>
+          <p>荒野保護協會與相關單位持續進行灘地營造、雜草移除及水道整理，希望恢復水鳥與濕地生物的棲息空間，目前已有小環頸鴴繁殖紀錄。</p>
+          <p>除了自然環境變遷外，人為餵食、流浪狗干擾及外來種問題，也對灘地生態造成影響，顯示濕地保育的重要性。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         環境區塊 3：陸地
+         ===================================================== -->
+    <section class="env-section reveal" id="env-land" aria-labelledby="env-land-title" style="transition-delay: 0.2s;">
+      <div class="env-section__scenery" aria-hidden="true">
+        <svg class="env-cloud env-cloud--left" viewBox="0 0 100 60"><path d="M20,60 a20,20 0 0,1 0,-40 a20,20 0 0,1 30,-10 a25,25 0 0,1 40,20 a15,15 0 0,1 0,30 z" fill="#ffffff" opacity="0.9"/></svg>
+        <svg class="env-cloud env-cloud--right" viewBox="0 0 100 60"><path d="M20,60 a20,20 0 0,1 0,-40 a20,20 0 0,1 30,-10 a25,25 0 0,1 40,20 a15,15 0 0,1 0,30 z" fill="#ffffff" opacity="0.9"/></svg>
+        <svg class="env-hills" viewBox="0 0 1200 240" preserveAspectRatio="none">
+          <path d="M0,120 C300,200 400,60 700,120 C900,160 1000,80 1200,100 L1200,240 L0,240 Z" fill="var(--clr-light-green)"/>
+          <path d="M0,160 C250,80 500,220 800,130 C1000,70 1100,160 1200,140 L1200,240 L0,240 Z" fill="var(--clr-mid-green)"/>
+          <circle cx="150" cy="150" r="3" fill="#ffffff" />
+          <rect x="146" y="152" width="8" height="6" fill="#ffffff" rx="2" />
+        </svg>
+      </div>
+
+      <div class="env-section__inner">
+        <div class="env-section__title-col">
+          <h2 class="env-section__title" id="env-land-title">陸地</h2>
+        </div>
+        <div class="env-section__content-col">
+          <h3 class="env-section__subtitle">文字文字文字文字文字文字</h3>
+          <p>自民國94年起，每年8月傍晚（太陽下山前約20分鐘），會有大量燕子（如家燕、洋燕、棕沙燕）聚集飛舞，天黑後飛入蘆葦叢夜棲。</p>
+          <p>最佳觀賞地點為「蘆葦叢區與大生態池交接的自行車道」，荒野保護協會每年夏季都會舉辦賞燕活動。</p>
+          <p>因泥灘地逐漸被蘆葦覆蓋，此區目前較難觀察到水鳥。</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       FOOTER (完全沿用既有結構，不隨設計稿更動)
+       ===================================================== -->
+  <footer class="footer" role="contentinfo">
+    <svg style="position:absolute;top:-120px;left:0;right:0;width:100%;" viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,110 C 360,130 360,40 720,80 C 1080,120 1080,10 1440,30 L1440,200 L0,200 Z" fill="#E9F0E1"/>
+    </svg>
+    <img class="footer__logo" aria-label="五股濕地生態園區 Logo" src="images/logo-green.webp" alt="" loading="lazy" />
+    <address class="footer__info" style="font-style:normal;">
+      地址：<a href="https://maps.app.goo.gl/PuJw7zFUjeeEWEgE9" target="_blank">新北市蘆洲區 成蘆大橋下方</a><br />
+      信箱：<a href="mailto:sowtpe07@wilderness.tw" target="_blank">sowtpe07@wilderness.tw</a><br /><br />
+      <a href="https://www.hrcm.ntpc.gov.tw/HtmlPageDetail/%E4%BA%94%E8%82%A1%E6%BF%95%E5%9C%B0" target="_blank">高灘地工程管理處</a>｜<a href="https://www.hrcmntmp.ntpc.gov.tw/facility-detail?id=baea2841-a0de-4f87-a1c0-925fd7c9f307" target="_blank">新北大都會公園</a>
+    </address>
+    <nav class="footer__socials" aria-label="社群媒體連結">
+      <a href="#" class="footer__social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#" class="footer__social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="#" class="footer__social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#405A35"/></svg></a>
+    </nav>
+    <p class="footer__copy">© 2026 五股濕地生態園區 · <a href="https://www.sow.org.tw" target="_blank">荒野保護協會</a></p>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="回到頂部">▲</button>
+
+  <script src="script/shared.js"></script>
+  <!-- 本頁目前無專屬複雜邏輯，因此預留空的 environment.js 或直接省略 -->
+  <script src="script/environment.js"></script>
+</body>
+</html>
