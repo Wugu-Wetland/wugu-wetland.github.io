@@ -102,3 +102,35 @@ a { color: inherit; text-decoration: none; }
 /* RWD */
 @media (min-width: 769px) { .mobile-only { display: none; } }
 @media (max-width: 768px) { .desktop-only { display: none; } .mobile-only { display: block; } .navbar { padding: 0 16px; } }
+
+/* ============================================================
+   修復全域圖層順序
+   ============================================================ */
+
+/* 1. 讓主內容區塊保持較高層級 */
+main {
+  position: relative;
+  z-index: 10;
+}
+
+.footer {
+  position: relative;
+  z-index: 1; /* 保持較低層級 */
+  margin-top: 100px; /* 預留一些空間給波浪，避免波浪蓋到上方內容 */
+}
+
+.footer > svg {
+  position: absolute;
+  /* 關鍵 1：不要用 top，改用 bottom: 100% 讓 SVG 完美貼齊 Footer 的上邊緣 */
+  bottom: 100%; 
+  left: 0;
+  width: 100%;
+  height: auto; /* 高度自動跟隨比例縮放 */
+  display: block; /* 消除 SVG 預設的底部文字空白間距 */
+  
+  /* 關鍵 2：往下位移 1px，讓波浪與 Footer 背景產生 1px 重疊，徹底殺死白線 */
+  transform: translateY(1px); 
+  
+  z-index: -1;
+  pointer-events: none;
+}
