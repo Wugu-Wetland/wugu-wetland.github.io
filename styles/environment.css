@@ -8,10 +8,9 @@
    ============================================================ */
 .environment-main {
   padding-top: 120px; /* 避開 Fixed Navbar 64px + 緩衝間距 */
-  padding-bottom: 80px;
-  background-color: var(--clr-pale); /* 延續專案的淺底色 */
+  padding-bottom: 100px;
   position: relative;
-  overflow: hidden;
+  z-index: -1;
 }
 
 /* 設計稿底部的沙色/綠色裝飾色塊 */
@@ -30,7 +29,7 @@
 
 .env-shape--1 {
   width: 60vw; height: 60vw;
-  background: rgba(212, 201, 168, 0.2); /* 借用 var(--clr-sand) 透明度 */
+  background: rgba(133, 173, 188, 0.25);
   top: -10%; left: -20%;
 }
 
@@ -42,8 +41,8 @@
 
 .env-shape--3 {
   width: 80vw; height: 40vw;
-  background: rgba(212, 201, 168, 0.25);
-  bottom: -5%; left: -10%;
+  background: rgba(212, 201, 168, 0.2); /* 借用 var(--clr-sand) 透明度 */
+  bottom: -10%; left: -10%;
 }
 
 /* ============================================================
@@ -71,41 +70,6 @@
   z-index: 1;
 }
 
-/* 雲朵定位與微動態 */
-.env-cloud {
-  position: absolute;
-  width: 120px;
-  height: auto;
-  animation: cloud-float 20s linear infinite alternate;
-}
-
-.env-cloud--left {
-  top: 15%;
-  left: 5%;
-  width: 160px;
-  animation-duration: 25s;
-}
-
-.env-cloud--right {
-  top: 25%;
-  right: 15%;
-  width: 140px;
-  animation-direction: alternate-reverse;
-}
-
-@keyframes cloud-float {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(30px); }
-}
-
-/* 底部丘陵 SVG 定位 */
-.env-hills {
-  position: absolute;
-  bottom: -2px; /* 避免接縫白邊 */
-  left: 0;
-  width: 100%;
-  height: 180px; /* 控制丘陵高度 */
-}
 
 /* ──────────────────────────────────────────────
    CONTENT (內容圖層：標題與文字)
@@ -116,7 +80,7 @@
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 40px;
-  padding: 64px 48px 140px; /* 底部 padding 留給丘陵空間 */
+  padding: 64px 48px; /* 底部 padding 留給丘陵空間 */
 }
 
 /* 左欄：大標題 */
@@ -144,7 +108,7 @@
 
 .env-section__subtitle {
   font-family: var(--font-body);
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--clr-text);
   margin-bottom: 16px;
@@ -152,7 +116,7 @@
 }
 
 .env-section__content-col p {
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.9;
   color: var(--clr-text-muted); /* 延續專案文字顏色 */
   margin-bottom: 20px;

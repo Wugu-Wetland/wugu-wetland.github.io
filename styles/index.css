@@ -98,8 +98,9 @@
 .card-back .btn { margin-top: auto; }
 
 /* PHOTO BANNER */
-.photo-banner { height: clamp(180px, 25vw, 280px); overflow: hidden; position: relative; }
-.photo-banner img { width: 100%; height: 100%; object-fit: cover; }
+.photo-banner { height: clamp(180px, 25vw, 80px); position: relative;;}
+.photo-banner img { width: 100%; height: 150%;}
+
 
 /* RWD */
 @media (max-width: 768px) {
