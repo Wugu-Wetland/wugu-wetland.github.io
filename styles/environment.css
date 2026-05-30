@@ -67,7 +67,14 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
+  touch-action: none;
   z-index: 1;
+}
+
+.env-section__scenery img {
+  height: 100%; 
+  width: 100%;
+  object-fit: cover;
 }
 
 
@@ -94,12 +101,13 @@
   color: var(--clr-text);
   font-weight: 700;
   letter-spacing: 0.05em;
+  text-shadow: 0px 0px 30px #ffffff, 0px 0px 40px #ffffff, 0px 0px 50px #ffffff, 0px 0px 60px #ffffff, 0px 0px 70px #ffffff; 
 }
 
 /* 右欄：內文 */
 .env-section__content-col {
   /* 在設計稿中文字是直接壓在背景上，但為了 RWD 可讀性，給予極淡的玻璃效果 */
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.733);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   padding: 32px;
@@ -127,23 +135,18 @@
   margin-bottom: 0;
 }
 
-/* ============================================================
-   RESPONSIVE DESIGN
-   ============================================================ */
+/* 在 mobile breakpoint 中的 .env-section__content-col */
 @media (max-width: 860px) {
   .env-section__inner {
     grid-template-columns: 1fr;
     gap: 24px;
     padding: 48px 32px 160px;
   }
-  
+
   .env-section__title-col {
     text-align: center;
   }
 
-  .env-cloud--left { width: 100px; left: -10px; }
-  .env-cloud--right { width: 90px; right: 0; }
-  .env-hills { height: 140px; }
 }
 
 @media (max-width: 480px) {
