@@ -114,7 +114,7 @@
 
 /* PHOTO BANNER */
 .photo-banner { height: clamp(180px, 25vw, 80px); position: relative;;}
-.photo-banner img { width: 100%; height: 150%;}
+.photo-banner img { width: 100%; height: 150%; object-fit: cover;}
 
 
 /* RWD */
@@ -123,7 +123,12 @@
   .news-section__blob-wrap { display: none; }
   .about-section__img { order: -1; }
   .ecology-grid, .species-grid { grid-template-columns: 1fr 1fr; }
-  .ecology-card img { aspect-ratio: 3/2; }
+  .ecology-card__img-wrap { aspect-ratio: 8/3; }
+  .map-section {display: none;}
+  .map-section__container {display: none;}
+  .species-card {height: 160px; min-height: 0;}
+  .card-inner { height: 100%; min-height: 0px;}
+  .card-back p { display: none; }
 }
 @media (max-width: 480px) {
   .ecology-grid { grid-template-columns: 1fr; }
