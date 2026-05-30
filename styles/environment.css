@@ -24,7 +24,6 @@
 .env-shape {
   position: absolute;
   border-radius: var(--radius-blob);
-  filter: blur(1px);
 }
 
 .env-shape--1 {
@@ -41,7 +40,7 @@
 
 .env-shape--3 {
   width: 80vw; height: 40vw;
-  background: rgba(212, 201, 168, 0.2); /* 借用 var(--clr-sand) 透明度 */
+  background: rgba(130, 112, 74, 0.2); /* 借用 var(--clr-sand) 透明度 */
   bottom: -10%; left: -10%;
 }
 
