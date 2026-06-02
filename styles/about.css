@@ -518,10 +518,18 @@ body {
    ============================================================ */
 
 @media (max-width: 768px) {
+  .about-map {
+    overflow: hidden;
+  }
+  .about-map__container-wrap {
+    position: relative;
+    left: -79%;
+    width: 195%;
+  }
   .about-map__info-card {
     width: 92%; /* 手機版稍微加寬，利用螢幕空間 */
     max-height: 80vh; /* 避免卡片太高，頂到手機狀態列或被瀏覽器導覽列擋住 */
-    padding: 24px 20px 32px; /* 增加底部的 padding，讓文字不要太貼底 */
+    padding: 12px 20px 32px; /* 增加底部的 padding，讓文字不要太貼底 */
     border-radius: 20px;
   }
 
