@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>物種介紹 | 五股濕地生態園區</title>
+  <meta name="description" content="探索五股濕地的各種珍貴物種，包含動物、植物，甚至是更多不同的生物！" />
+  <meta property="og:title" content="物種介紹 | 五股濕地生態園區" />
+  <meta property="og:description" content="探索五股濕地的各種珍貴物種，包含動物、植物，甚至是更多不同的生物！" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+  
+  <link rel="stylesheet" href="styles/shared.css" />
+  <link rel="stylesheet" href="styles/species.css" />
+  
+  <!-- 新增：預先載入首屏最關鍵的圖片，提升 LCP 速度 -->
+  <!-- 注意：請在後端或打包工具先轉出一份 .webp 檔案 -->
+  <link rel="preload" as="image" href="images/index-slides-1.webp" type="image/webp" fetchpriority="high">
+</head>
+<body>
+
+  <!-- =====================================================
+       NAVBAR (完全沿用既有結構，不隨設計稿更動)
+       ===================================================== -->
+  <header>
+    <nav class="navbar" role="navigation" aria-label="主要導覽">
+      <a class="navbar__logo" href="index.html" aria-label="五股濕地生態園區 首頁">
+        <img src="images/logo-green.webp" alt="" width="200" height="44" />
+      </a>
+      <div class="navbar__actions">
+        <a href="https://www.sow.org.tw/event/search?title=%E4%BA%94%E8%82%A1&suo_shu_fen_hui_37=592&event_type=All&is_monetary=All" class="navbar__ext-link desktop-only" aria-label="參與活動" target="_blank">參與活動</a>
+        <a href="https://www.sow.org.tw" class="navbar__ext-link desktop-only" aria-label="荒野官網" target="_blank">荒野官網</a>
+        <button class="navbar__hamburger" id="hamburger-btn" aria-expanded="false" aria-controls="nav-drawer" aria-label="開啟選單">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="nav-drawer" id="nav-drawer" role="menu">
+      <ul class="nav-drawer__list">
+        <li><a href="index.html" role="menuitem">首頁</a></li>
+        <li><a href="about.html" role="menuitem">關於五股濕地</a></li>
+        <li><a href="environment.html" role="menuitem">生態環境</a></li>
+        <li><a href="javescript:void(0)" role="menuitem">物種介紹</a></li>
+        <li><a href="https://scratch.mit.edu/projects/1315380063/fullscreen/" role="menuitem" target="_blank">互動遊戲</a></li>
+        <!--<li><a href="javascript:void(0)" role="menuitem">棲地工作</a></li>-->
+        <!--<li><a href="javascript:void(0)" role="menuitem">年度時程</a></li>-->
+        <!--<li><a href="javascript:void(0)" role="menuitem">網路相簿</a></li>-->
+        <li class="mobile-only"><a href="https://www.sow.org.tw" role="menuitem" style="border-top: 1px solid var(--clr-light-green); margin-top: 10px;" target="_blank">荒野官網</a></li>
+        <li class="mobile-only"><a href="https://www.sow.org.tw/event/search?title=%E4%BA%94%E8%82%A1&suo_shu_fen_hui_37=592&event_type=All&is_monetary=All" role="menuitem" target="_blank">參與活動</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="species-main">
+
+    <section class="species-section reveal" id="species-A" aria-labelledby="species-A-title">
+      <div class="species-section__scenery" aria-hidden="true" id="species-A-scenery">
+        <img src="images/species-A.webp" alt="文字文字文字" loading="lazy" />
+        
+      </div>
+
+      <!-- 內容圖層 -->
+      <div class="species-section__inner">
+        <div class="species-section__title-col">
+          <h2 class="species-section__title" id="species-A-title">四斑細蟌</h2>
+        </div>
+        <div class="species-section__content-col">
+          <h3 class="species-section__subtitle">基本資料</h3>
+          <p><b>名稱：</b>四斑細蟌</p>
+          <p><b>學名：</b>Mortonagrion hirosei Asahina</p>
+          <p><b>分類：</b>蜻蜓目、細蟌科、桑色細蟌屬</p>
+          <p><b>類型 ：</b>體型嬌小的豆娘</p>
+          <h3 class="species-section__subtitle">外型特徵</h3>
+          <p>最大特徵是眼後區有上下各一對淡綠色圓斑，共四個斑點。</p>
+          <p>圓斑顏色酷似蘋果綠（部分雌蟲不具有斑點）。</p>
+          <h3 class="species-section__subtitle">棲息環境與習性</h3>
+          <p><b>棲息地：</b>主要生活在河口沿海、淡鹹水混合的蘆葦草澤。</p>
+          <p><b>指標性：</b>對環境要求極嚴苛，是河川生態多樣性的重要指標物種。</p>
+          <p><b>活動力：</b>生性隱密，依靠蘆葦叢保護。</p>
+          <h3 class="species-section__subtitle">保育狀況</h3>
+          <p><b>國際等級：</b>曾被列瀕危或近危物種。</p>
+          <p><b>生存挑戰：</b>面臨棲地陸化、大面積剷除蘆葦等威脅。</p>
+          <p><b>台灣分布：</b>淡水河流域的五股溼地、社子島溼地、北投磺港溪口溼地。</p>
+          <p><b>出現時間：</b>在台灣，成蟲較容易在每年的 3 月至 10 月 之間被觀察到。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="species-section reveal" id="species-B" aria-labelledby="species-B-title" style="transition-delay: 0.1s;">
+      <div class="species-section__scenery" aria-hidden="true" id="species-B-scenery">
+        <img src="images/species-B.webp" alt="文字文字文字" loading="lazy" />
+      </div>
+
+      <div class="species-section__inner">
+        <div class="species-section__title-col">
+          <h2 class="species-section__title" id="species-B-title" >東方<br class="desktop-only">環頸鴴</h2>
+        </div>
+        <div class="species-section__content-col">
+          <h3 class="species-section__subtitle">基本資料</h3>
+          <p><b>名稱：</b>東方環頸鴴</p>
+          <p><b>學名：</b>Charadrius alexandrinus</p>
+          <p><b>別名：</b>環頸鴴、白領鴴</p>
+          <p><b>分類：</b>鴴目、鴴科、鴴屬</p>
+          <p><b>類型 ：</b>體型嬌小的鴴類</p>
+          <h3 class="species-section__subtitle">外型特徵</h3>
+          <p><b>頸部標記：</b>最明顯特徵是後頸有白色頸輪，但與胸前深色的頸輪並不相連。</p>
+          <p><b>繁殖羽色：</b>雄鳥繁殖羽擁有黑色面具（過眼線），頭頂及後頸呈淡栗紅色，並有中斷的黑色頸輪。</p>
+          <p><b>性別與季節差異：</b>雌鳥及非繁殖羽的個體，原本黑色的部分會轉為褐色或棕灰色。</p>
+          <h3 class="species-section__subtitle">棲息環境與習性</h3>
+          <p><b>棲息地：</b>偏好鹹水環境，主要為泥灘地、沙灘及潮間帶。</p>
+          <p><b>覓食習性：</b>覓食不分晝夜，配合潮汐時間。移動時採典型的「小跑一段、停下、啄食」方式。</p>
+          <p><b>護巢行為：</b>繁殖期間若遇掠食者靠近，親鳥會表現出在地面掙扎的「擬傷行為」，藉此將威脅誘離巢穴。</p>
+          <p><b>雛鳥特性：</b>幼鳥屬早熟型，出生數小時即可奔跑覓食，遇到危險時會伏下依靠保護色避敵。</p>
+          <h3 class="species-section__subtitle">保育狀況</h3>
+          <p><b>遷留型態：</b>在台灣屬於普遍的冬候鳥及過境鳥，僅有少數為留鳥。</p>
+          <p><b>度冬族群：</b>是台灣度冬數量最多的水鳥之一，冬季常成千上萬地集結活動，並與黑腹濱鷸等濱鳥混群。</p>
+          <p><b>停留時間：</b>度冬個體主要於每年 10 月抵達，停留至翌年 4 月。</p>
+          <p></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="species-section reveal" id="species-C" aria-labelledby="species-C-title" style="transition-delay: 0.2s;">
+      <div class="species-section__scenery" aria-hidden="true" id="species-C-scenery">
+        <img src="images/species-C.webp" alt="文字文字文字" loading="lazy" />
+      </div>
+      <div class="species-section__inner">
+        <div class="species-section__title-col">
+          <h2 class="species-section__title" id="species-C-title">小水鴨</h2>
+        </div>
+        <div class="species-section__content-col">
+          <h3 class="species-section__subtitle">基本資料</h3>
+          <p><b>名稱：</b>小水鴨</p>
+          <p><b>學名：</b>Anas crecca</p>
+          <p><b>別名：</b>綠翅鴨</p>
+          <p><b>分類：</b>雁鴨科、鴨屬</p>
+          <p><b>類型 ：</b>體型最小的雁鴨（全長 38 公分）</p>
+          <h3 class="species-section__subtitle">外型特徵</h3>
+          <p><b>雄鳥特徵：</b>繁殖羽頭頸為栗褐色，擁有橫跨眼部的綠色眼罩（過眼帶），且尾部兩側有醒目的黃色斑塊。</p>
+          <p><b>雌鳥特徵：</b>全身呈現一致的黃褐色，遍布深褐色鱗狀斑點，這類色澤與潮間帶環境相近，具備極佳的掩蔽偽裝功能。</p>
+          <p><b>腳部構造：</b>腳黑色且趾間具蹼膜，不僅有利於在泥濘灘地行走，也是水中游泳的重要推進工具。</p>
+          <h3 class="species-section__subtitle">棲息環境與習性</h3>
+          <p><b>棲息地：</b>廣泛分布於河口、水田、溪流、湖泊等水域。</p>
+          <p><b>活動規律：</b>具有強烈的群聚性，在河口活動的族群會隨潮汐變化而移動，通常在漲潮或退潮時覓食最為活躍。</p>
+          <p><b>防禦行為：</b>警戒心強，遇猛禽威脅時會集體驚起，形成緊密編隊在空中不斷繞圈飛行。</p>
+          <p><b>繁殖行為：</b>早春時雄鳥會展現頭上頂、尾上翹、頸羽外張等展示行為來吸引配偶。</p>
+          <h3 class="species-section__subtitle">保育狀況</h3>
+          <p><b>遷留型態：</b>在台灣屬於普遍且數量眾多的冬候鳥。</p>
+          <p><b>度冬族群：</b>是台灣度冬雁鴨中數量最多的鳥種，單一地點最高可達數千隻，五股溼地每年約有四百隻左右在此度冬。</p>
+          <p><b>停留時間：</b>主要於每年 10 月抵達，停留至翌年 4 月（清明節左右）北返西伯利亞或中國東北繁殖。</p>
+          <p></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <section class="species-section reveal" id="species-D" aria-labelledby="species-D-title" style="transition-delay: 0.2s;">
+      <div class="species-section__scenery" aria-hidden="true" id="species-D-scenery">
+        <img src="images/species-D.webp" alt="文字文字文字" loading="lazy" />
+      </div>
+      <div class="species-section__inner">
+        <div class="species-section__title-col">
+          <h2 class="species-section__title" id="species-D-title">蘆葦</h2>
+        </div>
+        <div class="species-section__content-col">
+          <h3 class="species-section__subtitle">基本資料</h3>
+          <p><b>名稱：</b>蘆葦</p>
+          <p><b>學名：</b>Phragmites communis (L.) Trin.</p>
+          <p><b>分類：</b>禾本科、蘆葦屬</p>
+          <p><b>類型：</b>多年生水生或濕生的高大禾草</p>
+          <h3 class="species-section__subtitle">外型特徵</h3>
+          <p><b>葉片形態：</b>葉片互生，呈現細長的披針形，葉質為紙質，具有典型的平行脈。</p>
+          <p><b>葉部細節：</b>葉鞘呈圓筒形，邊緣帶有紫黑色；葉舌部位有毛。</p>
+          <p><b>花序特徵：</b>頂生的圓錐花序，長約 10 至 40 公分，呈現疏散且稍稍下垂的姿態；小穗中包含 4 至 7 朵花。</p>
+          <p><b>莖部構造：</b>具有中空的莖部，是其構造上的重要特點。</p>
+          <h3 class="species-section__subtitle">生長環境與生態功能</h3>
+          <p><b>分佈環境：</b>廣泛分布於全世界熱帶及溫帶地區，常見於圳溝邊、河堤沼澤及沿海濕地。</p>
+          <p><b>淨化水質：</b>多生長於水流較緩處，具有過濾泥沙及淨化水質的生態效益。</p>
+          <p><b>水土保持：</b>是優良的保土固堤植物，能穩固河岸與濕地土質。</p>
+          <h3 class="species-section__subtitle">經濟與民生用途</h3>
+          <p><b>工業與編織：</b>可作為造紙、人造絲的原料；莖部可編織成蓆子或簾子，亦可製成蘆笛。</p>
+          <p><b>日常用品：</b>花序可製成掃帚，花絮則能作為枕頭的填充物。</p>
+          <p><b>食用：</b>嫩芽可食用，嫩葉含有豐富蛋白質與糖分，是優良的飼料。</p>
+          <p><b>藥用：</b>根狀莖稱為「蘆根」，中醫上具有性寒、味甘的特性，可入藥使用。</p>
+          <p></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+       FOOTER (完全沿用既有結構，不隨設計稿更動)
+       ===================================================== -->
+  <footer class="footer" role="contentinfo">
+    <svg viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,110 C 360,130 360,40 720,80 C 1080,120 1080,10 1440,30 L1440,200 L0,200 Z" fill="#E9F0E1"/>
+    </svg>
+    <img class="footer__logo" aria-label="五股濕地生態園區 Logo" src="images/logo-green.webp" alt="" loading="lazy" />
+    <address class="footer__info" style="font-style:normal;">
+      地址：<a href="https://maps.app.goo.gl/PuJw7zFUjeeEWEgE9" target="_blank">新北市蘆洲區 成蘆大橋下方</a><br />
+      信箱：<a href="mailto:sowtpe07@wilderness.tw" target="_blank">sowtpe07@wilderness.tw</a><br /><br />
+      <a href="https://www.hrcm.ntpc.gov.tw/HtmlPageDetail/%E4%BA%94%E8%82%A1%E6%BF%95%E5%9C%B0" target="_blank">高灘地工程管理處</a>｜<a href="https://www.hrcmntmp.ntpc.gov.tw/facility-detail?id=baea2841-a0de-4f87-a1c0-925fd7c9f307" target="_blank">新北大都會公園</a>
+    </address>
+    <nav class="footer__socials" aria-label="社群媒體連結">
+      <!--Facebook--><a href="https://www.facebook.com/wuguwetland/?locale=zh_TW" class="footer__social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <!--Instagram--><a href="https://www.instagram.com/sow_taiwan/reels/" class="footer__social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <!--Youtube--><a href="https://www.youtube.com/@sowtaiwan" class="footer__social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#405A35"/></svg></a>
+    </nav>
+    <p class="footer__copy">© 2026 五股濕地生態園區 · <a href="https://www.sow.org.tw" target="_blank">荒野保護協會</a></p>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="回到頂部">▲</button>
+  <script src="script/shared.js"></script>
+  <script src="script/about.js"></script>
+</body>
+</html>
