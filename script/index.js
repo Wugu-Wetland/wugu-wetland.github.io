@@ -54,33 +54,81 @@
     goTo(0);
   }
 
-  // 2. NEWS SECTION Mock Data
-  const newsList = document.getElementById('news-list');
+// 2. NEWS SECTION — 從 Google Sheet 公開 CSV 抓荒野活動資料
+  var newsList = document.getElementById('news-list');
   if (newsList) {
-    const MOCK_DATA = {
-      status: 'success',
-      data: [
-        { title_zh: '測試消息', date_zh: '2025/04/20', desc_zh: '文字文字文字文字...', url: '#' },
-        { title_zh: '測試消息', date_zh: '2025/04/20', desc_zh: '文字文字文字文字...', url: '#' },
-        { title_zh: '測試消息', date_zh: '2025/03/20', desc_zh: '文字文字文字文字...', url: '#' }
-      ]
-    };
+    // ★ 將下方的 ID 替換為你的 Google Sheet「發布到網路」的連結 ID
+    var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vh68XSygvjgeGyOjZNAdcMFtxti62hWa0JEdBMWhyd33Eov0OUHICg27uf7Vxvq35RvYWZEZqVaf/pub?output=csv';
 
-    setTimeout(() => {
-      newsList.style.opacity = '0';
-      setTimeout(() => {
-        newsList.innerHTML = MOCK_DATA.data.map(item => `
-        <li class="news-item">
-          <a href="${item.url}" style="display:block;text-decoration:none;color:inherit;" aria-label="${item.title_zh}">
-            <p class="news-item__title">${item.title_zh} <span class="news-item__meta" style="font-weight:400;margin-left:8px;">${item.date_zh}</span></p>
-            <p class="news-item__desc">${item.desc_zh}</p>
-          </a>
-        </li>`).join('');
-        newsList.style.transition = 'opacity 0.4s';
-        newsList.style.opacity = '1';
-      }, 200);
-    }, 800);
+    function parseEventCSV(csvText) {
+      csvText = csvText.replace(/^\uFEFF/, '').trim();
+      if (!csvText) return [];
+      var rows = [];
+      var currentRow = [];
+      var cell = '';
+      var inQuote = false;
+      for (var i = 0; i < csvText.length; i++) {
+        var ch = csvText[i], nx = csvText[i + 1];
+        if (ch === '"') {
+          if (inQuote && nx === '"') { cell += '"'; i++; }
+          else { inQuote = !inQuote; }
+        } else if (ch === ',' && !inQuote) {
+          currentRow.push(cell); cell = '';
+        } else if ((ch === '\r' || ch === '\n') && !inQuote) {
+          if (ch === '\r' && nx === '\n') i++;
+          currentRow.push(cell); rows.push(currentRow);
+          currentRow = []; cell = '';
+        } else { cell += ch; }
+      }
+      if (cell || currentRow.length > 0) { currentRow.push(cell); rows.push(currentRow); }
+      if (rows.length < 2) return [];
+      var headers = rows[0].map(function(h) { return h.trim(); });
+      var data = [];
+      for (var r = 1; r < rows.length; r++) {
+        if (rows[r].join('').trim() === '') continue;
+        var obj = {};
+        headers.forEach(function(h, idx) { obj[h] = rows[r][idx] ? rows[r][idx].trim() : ''; });
+        data.push(obj);
+      }
+      return data;
+    }
+
+    fetch(SHEET_CSV_URL)
+      .then(function(res) { return res.text(); })
+      .then(function(csv) {
+        var events = parseEventCSV(csv);
+        events = events.slice(0, 3);
+        newsList.style.opacity = '0';
+        setTimeout(function() {
+          if (events.length === 0) {
+            newsList.innerHTML = '<li class="news-item"><p class="news-item__title">目前沒有活動消息</p></li>';
+          } else {
+            newsList.innerHTML = events.map(function(evt) {
+              var title  = evt['活動名稱'] || '';
+              var date   = evt['日期'] || '';
+              var type   = evt['類型'] || '';
+              var branch = evt['分會'] || '';
+              var status = evt['狀態'] || '';
+              var link   = evt['連結'] || '#';
+              var desc   = [type].filter(function(s) { return s; }).join(' · ');
+              return '<li class="news-item">' +
+                '<a href="' + link + '" target="_blank" style="display:block;text-decoration:none;color:inherit;" aria-label="' + title + '">' +
+                  '<p class="news-item__title">' + title +
+                    ' <br><br><span class="news-item__meta" style="font-weight:400;"><b>｜時間：</b>' + date + '</span>' +
+                  '</p>' +
+                  '<p class="news-item__desc"><b>｜類型：</b>' + desc + '</p>' +
+                '</a></li>';
+            }).join('');
+          }
+          newsList.style.transition = 'opacity 0.4s';
+          newsList.style.opacity = '1';
+        }, 200);
+      })
+      .catch(function() {
+        newsList.innerHTML = '<li class="news-item"><p class="news-item__title">活動資料載入失敗，請稍後再試</p></li>';
+      });
   }
+
 
   // 3. MAP BUTTON BINDING (修復 inline onclick)
   const mapBtn = document.getElementById('map-btn');
