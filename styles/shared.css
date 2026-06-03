@@ -14,7 +14,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { overflow-x: hidden; overflow-y: scroll; scroll-behavior: smooth; font-size: 16px; }
 body { font-family: var(--font-body); color: var(--clr-text); background: var(--clr-white); overflow-x: hidden; background-color: var(--clr-pale); /* 延續專案的淺底色 */}
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
