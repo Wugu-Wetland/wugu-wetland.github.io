@@ -102,11 +102,13 @@
 .species-card.is-flipped .card-inner { transform: rotateY(180deg); }
 .card-front, .card-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; backface-visibility: hidden; padding: 40px 24px 28px; display: flex; flex-direction: column; align-items: flex-start; overflow: hidden; }
 .card-back { transform: rotateY(180deg); justify-content: flex-start; }
+.card-front > .species-card__name {position: fixed; top: 75%;}
 .species-card:nth-child(1) .card-front, .species-card:nth-child(1) .card-back { background: var(--clr-mid-green); }
 .species-card:nth-child(2) .card-front, .species-card:nth-child(2) .card-back { background: var(--clr-sand); }
 .species-card:nth-child(3) .card-front, .species-card:nth-child(3) .card-back { background: var(--clr-slate-blue); color: var(--clr-white); }
 .species-card:nth-child(4) .card-front, .species-card:nth-child(4) .card-back { background: var(--clr-mid-green); }
 .species-card__silhouette { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 16px; filter: brightness(0); opacity: 0.8; line-height: 1; }
+.species-card__silhouette img { position:relative; height: 60%; object-fit: cover; }
 .species-card:nth-child(3) .species-card__silhouette { color: var(--clr-white); opacity: 1; }
 .species-card__name { font-family: var(--font-heading); font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 700; color: inherit; margin-top: auto; }
 .card-back p { font-size: 1rem; line-height: 1.6; margin-bottom: 20px; opacity: 0.9; }
@@ -127,8 +129,10 @@
   .map-section {display: none;}
   .map-section__container {display: none;}
   .species-card {height: 160px; min-height: 0;}
+  .species-card__silhouette img { position:relative; max-height: 30%; object-fit: cover; }
   .card-inner { height: 100%; min-height: 0px;}
   .card-back p { display: none; }
+  .card-back .btn { font-size: 0.7rem; }
 }
 @media (max-width: 480px) {
   .ecology-grid { grid-template-columns: 1fr; }
