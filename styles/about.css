@@ -128,7 +128,6 @@ body {
 
 .about-content-section__inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: start;
   max-width: 900px;
@@ -184,7 +183,7 @@ body {
 .about-geo p,
 .about-history p {
   font-size: 1rem;
-  line-height: 1.9;
+  line-height: 1.6;
   color: var(--clr-text-muted);
   margin-bottom: 16px;
   max-width: 800px;
@@ -512,6 +511,79 @@ body {
   opacity: 1;
   transform: translate(-50%, 0px); /* 三角形貼齊浮動後的氣泡 */
 }
+
+/* ============================================================
+   HISTORY ACCORDION — 歷史摺疊面板
+   ============================================================ */
+.history-accordion {
+  border-bottom: 1px solid rgba(64, 90, 53, 0.15);
+}
+
+.history-accordion:last-of-type {
+  border-bottom: none;
+}
+
+.history-accordion summary.subtitle {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 20px 32px 20px 0;
+  line-height: 1.4;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+}
+
+/* 隱藏 Safari / 舊版瀏覽器的原生三角箭頭 */
+.history-accordion summary.subtitle::-webkit-details-marker {
+  display: none;
+}
+
+/* 自訂箭頭指示符（右側 V 形） */
+.history-accordion summary.subtitle::after {
+  content: '';
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 2.5px solid var(--clr-dark-green);
+  border-bottom: 2.5px solid var(--clr-dark-green);
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 0.3s ease;
+}
+
+/* 展開時箭頭旋轉朝上 */
+.history-accordion[open] summary.subtitle::after {
+  transform: translateY(-30%) rotate(-135deg);
+}
+
+/* 摺疊內文容器 */
+.history-accordion__body {
+  padding: 0 0 20px;
+  animation: accordion-fade-in 0.3s ease;
+}
+
+.history-accordion__body p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--clr-text-muted);
+  margin-bottom: 12px;
+  max-width: 800px;
+}
+
+.history-accordion__body p:last-child {
+  margin-bottom: 0;
+}
+
+@keyframes accordion-fade-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 
 /* ============================================================
    ABOUT-MAP — 手機版資訊框 RWD 微調

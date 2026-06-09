@@ -38,9 +38,9 @@
     <div class="nav-drawer" id="nav-drawer" role="menu">
       <ul class="nav-drawer__list">
         <li><a href="javascript:void(0)" role="menuitem">首頁</a></li>
-        <li><a href="about.html" role="menuitem">關於五股濕地</a></li>
-        <li><a href="environment.html" role="menuitem">生態環境</a></li>
-        <li><a href="species.html" role="menuitem">物種介紹</a></li>
+        <li><a href="about" role="menuitem">關於五股濕地</a></li>
+        <li><a href="environment" role="menuitem">生態環境</a></li>
+        <li><a href="species" role="menuitem">物種介紹</a></li>
         <li><a href="https://scratch.mit.edu/projects/1315380063/fullscreen/" role="menuitem" target="_blank">互動遊戲</a></li>
         <!--<li><a href="javascript:void(0)" role="menuitem">棲地工作</a></li>-->
         <!--<li><a href="javascript:void(0)" role="menuitem">年度時程</a></li>-->
@@ -116,7 +116,7 @@
           <hr class="divider" />
           <p class="about-section__meta">國家級重要濕地 ・ 新北市蘆洲區</p><br>
           <p class="about-section__desc">春天爭豔的野花<br>夏天絢爛的晚霞<br>秋天蒼茫的葦浪<br>冬天靜謐的候鳥身影<br><br>位於新北市蘆洲區的濕地生態環境，<br>是國家級重要濕地，<br>孕育著許多獨特的生物......</p>
-          <a href="about.html" class="btn" aria-label="關於五股濕地詳細內容">更多內容 &nbsp ❯</a>
+          <a href="about" class="btn" aria-label="關於五股濕地詳細內容">更多內容 &nbsp ❯</a>
         </div>
       </div>
       <div class="wave-bottom" aria-hidden="true"><svg viewBox="0 0 1440 48" preserveAspectRatio="none"><path d="M0,0 C360,48 1080,48 1440,0 L1440,48 L0,48 Z" fill="#ffffff"/></svg></div>
@@ -126,12 +126,12 @@
     <section class="ecology-section" id="ecology" aria-labelledby="ecology-title">
       <div class="ecology-section__header">
         <h2 class="section-title" id="ecology-title">生態環境</h2>
-        <a href="environment.html" class="btn btn--outline" aria-label="生態環境詳細內容">詳細內容 &nbsp ❯</a>
+        <a href="environment" class="btn btn--outline" aria-label="生態環境詳細內容">詳細內容 &nbsp ❯</a>
       </div>
       <hr class="divider" style="max-width:900px;margin:0 auto 8px;padding:0 24px;display:block;" />
       
       <div class="ecology-grid reveal">
-        <a href="environment.html#env-water-scenery">
+        <a href="environment#env-water-scenery">
           <div class="ecology-card">
             <div class="ecology-card__img-wrap">
               <img src="images/env-water.webp" alt="五股濕地的「水域」" loading="lazy">
@@ -139,7 +139,7 @@
             <p class="ecology-card__label">五股濕地的「水域」</p>
           </div>
         </a>
-        <a href="environment.html#env-mudflat-scenery">
+        <a href="environment#env-mudflat-scenery">
           <div class="ecology-card">
             <div class="ecology-card__img-wrap">
               <img src="images/env-mudflat.webp" alt="五股濕地的「灘地」" loading="lazy">
@@ -147,7 +147,7 @@
             <p class="ecology-card__label">五股濕地的「灘地」</p>
           </div>
         </a>
-        <a href="environment.html#env-land-scenery">
+        <a href="environment#env-land-scenery">
           <div class="ecology-card">
             <div class="ecology-card__img-wrap">
               <img src="images/env-land.webp" alt="五股濕地的「陸地」" loading="lazy">
@@ -176,28 +176,28 @@
         <article class="species-card reveal" role="listitem" tabindex="0" aria-label="某種生物介紹">
           <div class="card-inner">
             <div class="card-front"><div class="species-card__silhouette" aria-hidden="true"><img src="images/species-silhouette-A.webp" alt="四斑細蟌的剪影" style="top: 15%; left: -5%;"></div><h3 class="species-card__name">四斑細蟌</h3></div>
-            <div class="card-back"><h3 class="species-card__name" style="margin-bottom:8px; margin-top:0;">四斑細蟌</h3><p>四斑細蟌是一種非常稀有的豆娘，只生活在特殊的河口蘆葦濕地環境。</p><button class="btn btn--outline-light" tabindex="-1" onclick="location.href='species.html#species-A'">更多內容 &nbsp ❯</button></div>
+            <div class="card-back"><h3 class="species-card__name" style="margin-bottom:8px; margin-top:0;">四斑細蟌</h3><p>四斑細蟌是一種非常稀有的豆娘，只生活在特殊的河口蘆葦濕地環境。</p><button class="btn btn--outline-light" tabindex="-1" onclick="location.href='species#species-A'">更多內容 &nbsp ❯</button></div>
           </div>
         </article>
         <!-- 招潮蟹 -->
         <article class="species-card reveal" role="listitem" style="transition-delay:0.1s" tabindex="0">
           <div class="card-inner">
             <div class="card-front"><div class="species-card__silhouette" aria-hidden="true"><img src="images/species-silhouette-B.webp" alt="東方環頸鴴的剪影" style="top: -5%; left: -5%;"></div><h3 class="species-card__name">東方環頸鴴</h3></div>
-            <div class="card-back"><h3 class="species-card__name" style="margin-bottom:8px; margin-top:0;">東方環頸鴴</h3><p>東方環頸鴴是台灣海濱及河口濕地極為常見的小型水鳥，牠們是台灣度冬數量最多的水鳥之一，以其特殊的「小跑、停下、啄食」覓食節奏著稱。</p><button class="btn btn--outline-light" tabindex="-1" onclick="location.href='species.html#species-B'">更多內容 &nbsp ❯</button></div>
+            <div class="card-back"><h3 class="species-card__name" style="margin-bottom:8px; margin-top:0;">東方環頸鴴</h3><p>東方環頸鴴是台灣海濱及河口濕地極為常見的小型水鳥，牠們是台灣度冬數量最多的水鳥之一，以其特殊的「小跑、停下、啄食」覓食節奏著稱。</p><button class="btn btn--outline-light" tabindex="-1" onclick="location.href='species#species-B'">更多內容 &nbsp ❯</button></div>
           </div>
         </article>
         <!-- 猛禽 -->
         <article class="species-card reveal" role="listitem" style="transition-delay:0.2s" tabindex="0">
           <div class="card-inner">
             <div class="card-front"><div class="species-card__silhouette" aria-hidden="true"><img src="images/species-silhouette-C.webp" alt="小水鴨的剪影" style="top: -5%; left: -5%;"></div><h3 class="species-card__name">小水鴨</h3></div>
-            <div class="card-back"><h3 class="species-card__name" style="margin-bottom:8px; margin-top:0;">小水鴨</h3><p>小水鴨是台灣冬季數量最多、體型最小的雁鴨科鳥類。雄鳥在繁殖期換上豔麗羽色後，頭部的綠色眼罩與尾部的黃色斑塊極具辨識度。<p><button class="btn btn--outline-light" tabindex="-1" onclick="location.href='species.html#species-C'">更多內容 &nbsp ❯</button></div>
+            <div class="card-back"><h3 class="species-card__name" style="margin-bottom:8px; margin-top:0;">小水鴨</h3><p>小水鴨是台灣冬季數量最多、體型最小的雁鴨科鳥類。雄鳥在繁殖期換上豔麗羽色後，頭部的綠色眼罩與尾部的黃色斑塊極具辨識度。<p><button class="btn btn--outline-light" tabindex="-1" onclick="location.href='species#species-C'">更多內容 &nbsp ❯</button></div>
           </div>
         </article>
         <!-- 四斑細蟌 -->
         <article class="species-card reveal" role="listitem" style="transition-delay:0.3s" tabindex="0">
           <div class="card-inner">
             <div class="card-front"><div class="species-card__silhouette" aria-hidden="true"><img src="images/species-silhouette-D.webp" alt="蘆葦的剪影" style="top: -10%; left: -10%;"></div><h3 class="species-card__name">蘆葦</h3></div>
-            <div class="card-back"><h3 class="species-card__name" style="margin-bottom:8px; margin-top:0;">蘆葦</h3><p>蘆葦是濕地生態系中極為重要的高大禾草，常成片生長於水陸交界處，能過濾泥沙與淨化水質，其更是四斑細蟌、水鳥等眾多生物賴以生存的家園。</p><button class="btn btn--outline-light" tabindex="-1" onclick="location.href='species.html#species-D'">更多內容 &nbsp ❯</button></div>
+            <div class="card-back"><h3 class="species-card__name" style="margin-bottom:8px; margin-top:0;">蘆葦</h3><p>蘆葦是濕地生態系中極為重要的高大禾草，常成片生長於水陸交界處，能過濾泥沙與淨化水質，其更是四斑細蟌、水鳥等眾多生物賴以生存的家園。</p><button class="btn btn--outline-light" tabindex="-1" onclick="location.href='species#species-D'">更多內容 &nbsp ❯</button></div>
           </div>
         </article>
       </div>
@@ -218,7 +218,7 @@
     <address class="footer__info" style="font-style:normal;">
       地址：<a href="https://maps.app.goo.gl/PuJw7zFUjeeEWEgE9" target="_blank">新北市蘆洲區 成蘆大橋下方</a><br />
       信箱：<a href="mailto:sowtpe07@wilderness.tw" target="_blank">sowtpe07@wilderness.tw</a><br /><br />
-      <a href="https://www.hrcm.ntpc.gov.tw/HtmlPageDetail/%E4%BA%94%E8%82%A1%E6%BF%95%E5%9C%B0" target="_blank">高灘地工程管理處</a>｜<a href="https://www.hrcmntmp.ntpc.gov.tw/facility-detail?id=baea2841-a0de-4f87-a1c0-925fd7c9f307" target="_blank">新北大都會公園</a>
+      <a href="javascript:void(0)" target="_blank">首頁</a>｜<a href="about">關於五股濕地</a>｜<a href="environment">生態環境</a>｜<a href="species">物種介紹</a>｜<a href="https://scratch.mit.edu/projects/1315380063/fullscreen/">互動遊戲</a>
     </address>
     <nav class="footer__socials" aria-label="社群媒體連結">
       <!--Facebook--><a href="https://www.facebook.com/wuguwetland/?locale=zh_TW" class="footer__social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>

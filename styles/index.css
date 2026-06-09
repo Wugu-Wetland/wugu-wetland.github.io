@@ -2,7 +2,7 @@
 .hero { position: relative; top: 64px; overflow: hidden; height: min(56vw, 520px); background: var(--clr-dark-green); }
 .hero__slides { display: flex; height: 100%; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
 .hero__slide { min-width: 100%; height: 100%; position: relative; flex-shrink: 0; background: var(--clr-dark-green); }
-.hero__slide img { height: 100%; width: 100%; object-fit: cover;}
+.hero__slide img { height: 100%; width: 100%; overflow: hidden;}
 .hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(40,60,30,0.45) 0%, transparent 60%); pointer-events: none; }
 .hero__cta { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); background: rgba(64,89,53,0.75); backdrop-filter: blur(4px); color: var(--clr-white); padding: 10px 28px; border-radius: 999px; font-size: 1rem; font-weight: 500; border: 1px solid rgba(255,255,255,0.35); cursor: pointer; transition: background var(--transition-base); white-space: nowrap; }
 .hero__cta:hover { background: rgba(64,89,53,0.95); }
