@@ -585,6 +585,63 @@ body {
 }
 
 
+.transport-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #47402b;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 20px 32px 20px 0;
+  line-height: 1.4;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+}
+
+/* 隱藏 Safari / 舊版瀏覽器的原生三角箭頭 */
+.transport-subtitle::-webkit-details-marker {
+  display: none;
+}
+
+/* 自訂箭頭指示符（右側 V 形） */
+.transport-subtitle::after {
+  content: '';
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 2.5px solid var(--clr-dark-green);
+  border-bottom: 2.5px solid var(--clr-dark-green);
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 0.3s ease;
+}
+
+/* 展開時箭頭旋轉朝上 */
+.transport-accordion[open] .transport-subtitle::after {
+  transform: translateY(-30%) rotate(-135deg);
+}
+
+/* 摺疊內文容器 */
+.transport-accordion__body {
+  padding: 0 0 20px;
+  animation: accordion-fade-in 0.3s ease;
+}
+
+.transport-accordion__body p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #47402b;
+  margin-bottom: 12px;
+  max-width: 800px;
+}
+
+.transport-accordion__body p:last-child {
+  margin-bottom: 0;
+}
+
+
 /* ============================================================
    ABOUT-MAP — 手機版資訊框 RWD 微調
    ============================================================ */
