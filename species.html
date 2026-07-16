@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>物種介紹 | 五股濕地生態園區</title>
-  <meta name="description" content="探索五股濕地的各種珍貴物種，包含四斑細蟌、東方環頸鴴、小水鴨與蘆葦等動植物，認識濕地的生物多樣性。" />
-  <meta name="keywords" content="五股濕地, 物種介紹, 四斑細蟌, 東方環頸鴴, 小水鴨, 蘆葦, 濕地生物, 賞鳥, 豆娘, 荒野保護協會" />
+  <meta name="description" content="探索五股濕地（五股溼地）的各種珍貴物種，包含四斑細蟌、東方環頸鴴、小水鴨與蘆葦等動植物，認識這片國家級重要濕地的生物多樣性。" />
+  <meta name="keywords" content="五股濕地, 五股溼地, 物種介紹, 五股濕地園區, 四斑細蟌, 東方環頸鴴, 小水鴨, 蘆葦, 濕地生物, 賞鳥, 豆娘, 荒野保護協會, Wugu Wetland" />
   <meta name="author" content="社團法人中華民國荒野保護協會" />
   <meta name="robots" content="index, follow" />
+  <meta name="application-name" content="五股濕地生態園區" />
   <link rel="canonical" href="https://wugu-wetland.github.io/species" />
 
   <!-- Open Graph -->
@@ -28,17 +29,31 @@
   <meta name="twitter:description" content="探索五股濕地的各種珍貴物種，包含四斑細蟌、東方環頸鴴、小水鴨與蘆葦等動植物。" />
   <meta name="twitter:image" content="https://wugu-wetland.github.io/images/species-A.webp" />
 
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-  <link rel="apple-touch-icon" href="images/favicon.ico" />
+  <!-- Favicon：根目錄 .ico 為 Google 搜尋結果偏好來源 -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/webp" href="images/logo-color.webp" sizes="512x512" />
+  <link rel="apple-touch-icon" href="images/logo-color.webp" />
 
-  
+  <!-- 結構化資料：WebSite 明確宣告網站名稱，避免 Google 顯示為「GitHub」 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "五股濕地生態園區",
+    "alternateName": ["五股溼地", "五股濕地", "五股濕地園區", "Wugu Wetland"],
+    "url": "https://wugu-wetland.github.io/"
+  }
+  </script>
+
   <link rel="stylesheet" href="styles/shared.css" />
   <link rel="stylesheet" href="styles/species.css" />
-  
+
   <!-- 新增：預先載入首屏最關鍵的圖片，提升 LCP 速度 -->
   <!-- 注意：請在後端或打包工具先轉出一份 .webp 檔案 -->
   <link rel="preload" as="image" href="images/index-slides-1.webp" type="image/webp" fetchpriority="high">
 </head>
+
 <body>
 
   <!-- =====================================================

@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>關於五股濕地 | 五股濕地生態園區</title>
-  <meta name="description" content="認識五股濕地生態園區——國家級重要濕地的地理位置、歷史沿革與託管關係，守護城市中珍貴的自然生態系統。" />
-  <meta name="keywords" content="五股濕地, 關於五股濕地, 五股濕地歷史, 二重疏洪道, 新北大都會公園, 荒野保護協會, 國家級重要濕地, 洲仔尾" />
+  <meta name="description" content="認識五股濕地（五股溼地）——國家級重要濕地的地理位置、歷史沿革與託管關係，位於二重疏洪道、新北大都會公園，由荒野保護協會守護城市中珍貴的自然生態系統。" />
+  <meta name="keywords" content="五股濕地, 五股溼地, 關於五股濕地, 五股濕地園區, 五股濕地歷史, 二重疏洪道, 新北大都會公園, 荒野保護協會, 國家級重要濕地, 洲仔尾, Wugu Wetland" />
   <meta name="author" content="社團法人中華民國荒野保護協會" />
   <meta name="robots" content="index, follow" />
+  <meta name="application-name" content="五股濕地生態園區" />
   <link rel="canonical" href="https://wugu-wetland.github.io/about" />
 
   <!-- Open Graph -->
@@ -28,17 +29,31 @@
   <meta name="twitter:description" content="國家級重要濕地，守護城市中的自然寶地。" />
   <meta name="twitter:image" content="https://wugu-wetland.github.io/images/about-hero-1.webp" />
 
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-  <link rel="apple-touch-icon" href="images/favicon.ico" />
+  <!-- Favicon：根目錄 .ico 為 Google 搜尋結果偏好來源 -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/webp" href="images/logo-color.webp" sizes="512x512" />
+  <link rel="apple-touch-icon" href="images/logo-color.webp" />
 
+  <!-- 結構化資料：WebSite 明確宣告網站名稱，避免 Google 顯示為「GitHub」 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "五股濕地生態園區",
+    "alternateName": ["五股溼地", "五股濕地", "五股濕地園區", "Wugu Wetland"],
+    "url": "https://wugu-wetland.github.io/"
+  }
+  </script>
 
   <link rel="stylesheet" href="styles/shared.css" />
   <link rel="stylesheet" href="styles/about.css" />
-  
+
   <!-- 新增：預先載入首屏最關鍵的圖片，提升 LCP 速度 -->
   <!-- 注意：請在後端或打包工具先轉出一份 .webp 檔案 -->
   <link rel="preload" as="image" href="images/index-slides-1.webp" type="image/webp" fetchpriority="high">
 </head>
+
 <body>
 
   <!-- NAVBAR -->

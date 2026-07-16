@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>五股濕地生態園區 | Wugu Wetland</title>
-  <meta name="description" content="五股濕地生態園區，位於新北市五股區與蘆洲區交界，是國家級重要濕地，提供豐富的生物多樣性與生態教育資源，由荒野保護協會認養維護。" />
-  <meta name="keywords" content="五股濕地, 五股濕地生態園區, Wugu Wetland, 荒野保護協會, 國家級重要濕地, 新北市濕地, 蘆洲濕地, 賞鳥, 賞燕, 生態教育" />
+  <meta name="description" content="五股濕地生態園區（五股溼地）位於新北市五股區與蘆洲區交界，又稱二重疏洪道、新北大都會公園，是國家級重要濕地，提供豐富生物多樣性與生態教育資源，由荒野保護協會認養維護。" />
+  <meta name="keywords" content="五股濕地, 五股溼地, 五股濕地生態園區, 五股濕地園區, 五股溼地生態園區, Wugu Wetland, 二重疏洪道, 新北大都會公園, 荒野保護協會, 國家級重要濕地, 新北市濕地, 蘆洲濕地, 賞鳥, 賞燕, 生態教育" />
   <meta name="author" content="社團法人中華民國荒野保護協會" />
   <meta name="robots" content="index, follow" />
+  <meta name="application-name" content="五股濕地生態園區" />
   <link rel="canonical" href="https://wugu-wetland.github.io/" />
 
   <!-- Open Graph -->
@@ -31,10 +32,24 @@
   <link rel="stylesheet" href="styles/shared.css" />
   <link rel="stylesheet" href="styles/index.css" />
 
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-  <link rel="apple-touch-icon" href="images/favicon.ico" />
+  <!-- Favicon：根目錄 .ico 為 Google 搜尋結果偏好來源，另提供 logo 作為高解析 icon -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/webp" href="images/logo-color.webp" sizes="512x512" />
+  <link rel="apple-touch-icon" href="images/logo-color.webp" />
 
-  <!-- 結構化資料：協助 Google 產生豐富結果與網站連結 -->
+  <!-- 結構化資料：WebSite 明確宣告網站名稱，避免 Google 顯示為「GitHub」 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "五股濕地生態園區",
+    "alternateName": ["五股溼地", "五股濕地", "五股濕地園區", "Wugu Wetland"],
+    "url": "https://wugu-wetland.github.io/"
+  }
+  </script>
+
+  <!-- 結構化資料：Park 提供地點與組織資訊，協助豐富結果 -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
