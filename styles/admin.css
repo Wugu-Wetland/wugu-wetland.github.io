@@ -1,0 +1,74 @@
+/* ============================================================
+   ADMIN.CSS — 網站後台外殼（不影響前台樣式）
+   ============================================================ */
+:root {
+  --adm-green: #405A35;
+  --adm-green-dark: #2f4327;
+  --adm-pale: #E9F0E1;
+  --adm-text: #24301f;
+  --adm-muted: #6b7a63;
+  --adm-warn: #b45309;
+  --adm-bar: 64px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; font-family: "Noto Sans TC", system-ui, -apple-system, "PingFang TC", sans-serif; color: var(--adm-text); background: var(--adm-pale); }
+[hidden] { display: none !important; }
+
+/* 登入 */
+.adm-login { min-height: 100%; display: grid; place-items: center; padding: 24px; }
+.adm-login__card { width: min(380px, 100%); background: #fff; border-radius: 16px; padding: 36px 28px; text-align: center; box-shadow: 0 10px 40px rgba(64,90,53,.15); }
+.adm-login__card h1 { margin: 16px 0 4px; font-size: 1.4rem; color: var(--adm-green); }
+.adm-login__hint { margin: 0 0 20px; color: var(--adm-muted); }
+#adm-google-btn { display: flex; justify-content: center; min-height: 44px; }
+#adm-password-form { display: grid; gap: 10px; }
+#adm-password-form input { padding: 11px 14px; border: 1px solid #cdd8c4; border-radius: 8px; font-size: 1rem; }
+.adm-login__error { min-height: 1.4em; margin: 14px 0 0; color: #b91c1c; font-size: .9rem; }
+
+/* 編輯區 */
+.adm-stage { position: fixed; inset: 0 0 var(--adm-bar) 0; background: #fff; }
+.adm-stage iframe { width: 100%; height: 100%; border: 0; display: block; }
+.adm-loading { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(255,255,255,.85); color: var(--adm-green); font-weight: 600; transition: opacity .2s; }
+.adm-loading.is-hidden { opacity: 0; pointer-events: none; }
+
+/* 工具列 */
+.adm-toolbar { position: fixed; left: 0; right: 0; bottom: 0; height: var(--adm-bar); z-index: 1000; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 16px; background: var(--adm-green-dark); color: #fff; box-shadow: 0 -4px 20px rgba(0,0,0,.18); }
+.adm-toolbar__group { display: flex; align-items: center; gap: 8px; }
+.adm-toolbar__status { flex: 1; text-align: center; font-size: .9rem; opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.adm-toolbar__status.is-dirty { color: #fde68a; opacity: 1; }
+.adm-select { display: flex; align-items: center; gap: 6px; font-size: .85rem; }
+.adm-select select { padding: 7px 10px; border-radius: 8px; border: 0; font-size: .95rem; }
+
+.adm-btn { appearance: none; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.08); color: inherit; padding: 8px 14px; border-radius: 8px; font-size: .9rem; cursor: pointer; white-space: nowrap; transition: background .15s; }
+.adm-btn:hover:not(:disabled) { background: rgba(255,255,255,.2); }
+.adm-btn:disabled { opacity: .4; cursor: not-allowed; }
+.adm-btn--primary { background: #fff; color: var(--adm-green-dark); border-color: #fff; font-weight: 600; }
+.adm-btn--primary:hover:not(:disabled) { background: var(--adm-pale); }
+.adm-btn--ghost { border-color: transparent; }
+.adm-login .adm-btn--primary, .adm-dialog .adm-btn--primary { background: var(--adm-green); color: #fff; border-color: var(--adm-green); }
+.adm-dialog .adm-btn { color: var(--adm-text); border-color: #cdd8c4; background: #fff; }
+.adm-dialog .adm-btn--primary { color: #fff; }
+
+@media (max-width: 900px) {
+  :root { --adm-bar: 104px; }
+  .adm-toolbar { flex-wrap: wrap; height: auto; min-height: var(--adm-bar); padding: 8px; justify-content: center; }
+  .adm-toolbar__status { order: -1; flex-basis: 100%; }
+  .adm-btn { padding: 7px 10px; font-size: .82rem; }
+}
+
+/* 對話框 */
+.adm-dialog { width: min(520px, calc(100% - 32px)); border: 0; border-radius: 14px; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+.adm-dialog::backdrop { background: rgba(20,30,15,.45); }
+.adm-dialog h2 { margin: 0 0 14px; font-size: 1.15rem; color: var(--adm-green); }
+.adm-dialog label { display: block; font-size: .85rem; color: var(--adm-muted); margin: 12px 0 4px; }
+.adm-dialog input, .adm-dialog textarea { width: 100%; padding: 9px 12px; border: 1px solid #cdd8c4; border-radius: 8px; font: inherit; }
+.adm-dialog textarea { min-height: 120px; resize: vertical; }
+.adm-dialog__note { font-size: .82rem; color: var(--adm-muted); line-height: 1.6; margin: 6px 0 0; }
+.adm-dialog__note.is-warn { color: var(--adm-warn); }
+.adm-dialog__preview { margin-top: 12px; max-height: 200px; display: grid; place-items: center; background: var(--adm-pale); border-radius: 8px; overflow: hidden; }
+.adm-dialog__preview img { max-width: 100%; max-height: 200px; display: block; }
+.adm-dialog__actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+
+/* 提示訊息 */
+.adm-toast { position: fixed; left: 50%; bottom: calc(var(--adm-bar) + 16px); transform: translate(-50%, 20px); background: var(--adm-text); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: .9rem; opacity: 0; pointer-events: none; transition: all .25s; z-index: 1100; max-width: calc(100% - 32px); }
+.adm-toast.is-show { opacity: 1; transform: translate(-50%, 0); }
+.adm-toast.is-error { background: #b91c1c; }

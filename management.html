@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-cms="admin">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>網站後台｜五股濕地生態園區</title>
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="stylesheet" href="styles/admin.css" />
+</head>
+<body>
+
+  <!-- 登入畫面 -->
+  <section class="adm-login" id="adm-login">
+    <div class="adm-login__card">
+      <img src="images/logo-green.webp" alt="五股濕地生態園區" width="200" height="44" />
+      <h1>網站後台</h1>
+      <p class="adm-login__hint">請以管理者身分登入</p>
+      <div id="adm-google-btn"></div>
+      <form id="adm-password-form" hidden>
+        <input type="password" id="adm-password" placeholder="管理者密碼" autocomplete="current-password" required />
+        <button type="submit" class="adm-btn adm-btn--primary">登入</button>
+      </form>
+      <p class="adm-login__error" id="adm-login-error" role="alert"></p>
+    </div>
+  </section>
+
+  <!-- 編輯畫面：只呈現頁面樣貌，網址維持在 /management -->
+  <main class="adm-stage" id="adm-stage" hidden>
+    <iframe id="adm-frame" name="wugu-cms-admin" title="頁面編輯預覽"
+            sandbox="allow-scripts allow-same-origin allow-presentation"></iframe>
+    <div class="adm-loading" id="adm-loading">載入中…</div>
+  </main>
+
+  <!-- 下方固定工具列 -->
+  <nav class="adm-toolbar" id="adm-toolbar" aria-label="後台工具列" hidden>
+    <div class="adm-toolbar__group">
+      <label class="adm-select">
+        <span>編輯頁面</span>
+        <select id="adm-page"></select>
+      </label>
+      <button class="adm-btn" id="adm-top" title="捲到頁面頂端">⤒ 置頂</button>
+      <button class="adm-btn" id="adm-bottom" title="捲到頁面底端">⤓ 置底</button>
+    </div>
+    <div class="adm-toolbar__status" id="adm-status">尚無變更</div>
+    <div class="adm-toolbar__group">
+      <button class="adm-btn" id="adm-undo" title="上一步（Ctrl+Z）">↶ 上一步</button>
+      <button class="adm-btn" id="adm-redo" title="下一步（Ctrl+Shift+Z）">↷ 下一步</button>
+      <button class="adm-btn" id="adm-cancel">取消變更</button>
+      <button class="adm-btn adm-btn--primary" id="adm-save">儲存</button>
+      <button class="adm-btn adm-btn--ghost" id="adm-logout" title="登出">登出</button>
+    </div>
+  </nav>
+
+  <!-- 對話框 -->
+  <dialog class="adm-dialog" id="adm-dialog">
+    <form method="dialog">
+      <h2 id="adm-dialog-title"></h2>
+      <div id="adm-dialog-body"></div>
+      <div class="adm-dialog__actions" id="adm-dialog-actions"></div>
+    </form>
+  </dialog>
+
+  <div class="adm-toast" id="adm-toast" role="status" aria-live="polite"></div>
+
+  <script src="script/cms.js"></script>
+  <script src="script/admin-frame.js"></script>
+  <script src="script/admin.js"></script>
+</body>
+</html>

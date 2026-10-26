@@ -88,6 +88,8 @@
   <!-- 新增：預先載入首屏最關鍵的圖片，提升 LCP 速度 -->
   <!-- 注意：請在後端或打包工具先轉出一份 .webp 檔案 -->
   <link rel="preload" as="image" href="images/index-slides-1.webp" type="image/webp" fetchpriority="high">
+  <link rel="preconnect" href="https://script.google.com" />
+  <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin />
 </head>
 <body>
 
@@ -302,6 +304,7 @@
 
   <button class="back-to-top" id="back-to-top" aria-label="回到頂部">▲</button>
 
+  <script src="script/cms.js"></script>
   <script src="script/shared.js"></script>
   <script src="script/index.js"></script>
 </body>
