@@ -58,7 +58,7 @@
   var newsList = document.getElementById('news-list');
   if (newsList) {
     // ★ 將下方的 ID 替換為你的 Google Sheet「發布到網路」的連結 ID
-    var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vh68XSygvjgeGyOjZNAdcMFtxti62hWa0JEdBMWhyd33Eov0OUHICg27uf7Vxvq35RvYWZEZqVaf/pub?output=csv';
+    var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-bYNdO1ciIuW1oKb82cnskwrR0uSlSPNdc9MWy-C0LaYFv3PukegnljLNbC9LZ7A56RjxawubnIt8/pub?gid=0&single=true&output=csv';
 
     function parseEventCSV(csvText) {
       csvText = csvText.replace(/^\uFEFF/, '').trim();
