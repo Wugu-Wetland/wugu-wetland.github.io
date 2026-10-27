@@ -71,6 +71,7 @@ button, select, input, textarea { font: inherit; }
 .adm-btn--danger:hover:not(:disabled) { background: #fef2f2; border-color: #fca5a5; color: var(--adm-danger); }
 .adm-btn--ghost { border-color: transparent; background: transparent; color: var(--adm-muted); }
 .adm-btn--ghost:hover:not(:disabled) { background: var(--adm-pale); border-color: transparent; }
+.adm-btn--ghost.is-active { background: #eef5e8; color: var(--adm-green); }
 .adm-login .adm-btn--primary { padding: 12px; font-size: 1rem; }
 
 @media (max-width: 960px) {

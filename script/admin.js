@@ -204,7 +204,7 @@
       if (S.restoredDraft) toast('已還原上次未儲存的草稿（' + Object.keys(S.draft).length + ' 項）');
       else if (!sessionStorage.getItem('wuguCMS:tip')) {
         sessionStorage.setItem('wuguCMS:tip', '1');
-        toast('虛線框內的文字可直接點擊編輯、點擊圖片可更換；灰色斜紋區塊不開放編輯');
+        toast('滑鼠移到文字上即可點擊編輯；灰色斜紋區塊不開放編輯');
       }
     }
   };
@@ -217,6 +217,7 @@
   function baseline(key) {
     var v = published(key);
     var f = S.byKey[key];
+    if (v == null && f && f.type === 'slides') v = CMS.legacySlides(f, S.content && S.content.pages && S.content.pages[S.page]);
     if (v == null) v = f ? f.defaultValue : '';
     return f && f.type === 'text' ? CMS.sanitize(v) : v;
   }
@@ -276,6 +277,7 @@
     },
     current: current,
     baseline: baseline,
+    showAll: function () { return S.showAll; },
     shortcut: function (name) { if (name === 'undo') undo(); if (name === 'redo') redo(); if (name === 'save') save(); }
   };
 
@@ -349,6 +351,22 @@
   $('adm-save').addEventListener('click', save);
   $('adm-undo').addEventListener('click', undo);
   $('adm-redo').addEventListener('click', redo);
+
+  // 顯示／隱藏所有可編輯範圍（記住偏好）
+  S.showAll = localStorage.getItem('wuguCMS:showAll') === '1';
+  function renderShowAll() {
+    var b = $('adm-outline');
+    b.classList.toggle('is-active', S.showAll);
+    b.setAttribute('aria-pressed', String(S.showAll));
+    b.querySelector('i').className = 'fa-solid ' + (S.showAll ? 'fa-eye' : 'fa-eye-slash');
+    window.WuguAdminFrame.setShowAll(S.showAll);
+  }
+  $('adm-outline').addEventListener('click', function () {
+    S.showAll = !S.showAll;
+    localStorage.setItem('wuguCMS:showAll', S.showAll ? '1' : '0');
+    renderShowAll();
+  });
+  renderShowAll();
   $('adm-cancel').addEventListener('click', function () {
     dialog('取消所有變更？', '<p>此頁面 ' + Object.keys(S.draft).length + ' 項尚未儲存的變更將被捨棄，並恢復為資料庫中的內容。</p>', [
       { label: '返回編輯', value: '' },

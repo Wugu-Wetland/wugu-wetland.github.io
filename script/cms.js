@@ -29,6 +29,8 @@
   var EXCLUDE = 'header, footer, nav, script, style, noscript, template, button, select, textarea, iframe, svg, ' +
                 '.btn, #news-list, [role="dialog"], .back-to-top, .skeleton, [data-cms-ignore]';
   var TEXT_TAGS = 'h1, h2, h3, h4, h5, h6, p, li, summary, figcaption, blockquote, dt, dd, th, td';
+  var DECOR = '[class*="wave"], [class*="curve"]'; // 波浪等裝飾圖樣，不開放編輯
+  var SLIDES = '#hero-slides';                     // 首頁橫幅，以整組清單管理
 
   function isExcluded(el) { return !!el.closest(EXCLUDE); }
 
@@ -52,6 +54,10 @@
     for (var i = 0; i < all.length; i++) {
       var el = all[i];
       if (isExcluded(el)) continue;
+      if (el.closest(DECOR) || el.closest(SLIDES)) {
+        if (el.tagName === 'IMG') nextKey(el, 'img'); // 保留序號，避免其他欄位名稱位移
+        continue;
+      }
       if (el.hasAttribute('data-title')) {
         var mk = nextKey(el, 'marker');
         fields.push({ key: mk + '@title', type: 'attr', attr: 'data-title', el: el });
@@ -68,11 +74,14 @@
         fields.push({ key: nextKey(el, el.tagName.toLowerCase()), type: 'text', el: el });
       }
     }
+    var slidesWrap = document.querySelector(SLIDES);
+    if (slidesWrap && !isExcluded(slidesWrap)) fields.push({ key: 'hero@slides', type: 'slides', el: slidesWrap });
     fields.forEach(function (f) { f.defaultValue = read(f); });
     return fields;
   }
 
   function read(f) {
+    if (f.type === 'slides') return JSON.stringify(readSlides(f.el));
     if (f.type === 'text') return f.el.innerHTML.trim();
     if (f.type === 'img') return f.el.getAttribute('src') || '';
     return f.el.getAttribute(f.attr) || '';
@@ -123,9 +132,139 @@
     return /^(https:\/\/|images\/|\/images\/)/i.test(url) ? url : '';
   }
 
-  // 5. 將資料套用到畫面（只更新有變動的欄位，避免重繪）
+  // 5. 首頁橫幅：資料為 JSON 清單 [{ src, alt }]
+  function readSlides(wrap) {
+    return Array.prototype.map.call(wrap.querySelectorAll('.hero__slide img'), function (img) {
+      return { src: img.getAttribute('src') || '', alt: img.getAttribute('alt') || '' };
+    });
+  }
+  function parseSlides(value) {
+    try { var list = JSON.parse(value); return Array.isArray(list) ? list : null; } catch (e) { return null; }
+  }
+  function escAttr(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+  }
+  function slidesHTML(list) {
+    return list.filter(function (s) { return s && safeImageUrl(imageUrl(s.src)); }).map(function (s, i) {
+      var id = driveId(s.src);
+      return '<div class="hero__slide" role="tabpanel" aria-label="輪播圖片 ' + (i + 1) + '">' +
+        '<img src="' + escAttr(safeImageUrl(imageUrl(s.src))) + '" alt="' + escAttr(s.alt || '輪播圖片 ' + (i + 1)) + '"' +
+        (i ? ' loading="lazy"' : '') + (id ? ' data-drive-id="' + id + '"' : '') + '>' +
+        '<div class="hero__overlay"></div></div>';
+    }).join('');
+  }
+  function bindDriveFallback(root) {
+    Array.prototype.forEach.call(root.querySelectorAll('img[data-drive-id]'), function (img) {
+      img.onerror = function () {
+        this.onerror = null;
+        this.src = 'https://drive.google.com/thumbnail?id=' + this.getAttribute('data-drive-id') + '&sz=w1920';
+      };
+    });
+  }
+  // 舊版資料（逐張圖片欄位）轉為清單
+  function legacySlides(f, values) {
+    var list = parseSlides(f.defaultValue) || [], changed = false;
+    values = values || {};
+    list.forEach(function (s, i) {
+      var k = 'hero-slides/img-' + i;
+      if (values[k]) { s.src = values[k]; changed = true; }
+      if (values[k + '@alt']) { s.alt = values[k + '@alt']; changed = true; }
+    });
+    return changed ? JSON.stringify(list) : null;
+  }
+  function currentSlide() {
+    if (api.carousel) return api.carousel.current();
+    var dots = document.querySelectorAll('#carousel-dots .hero__dot');
+    for (var i = 0; i < dots.length; i++) if (dots[i].classList.contains('active')) return i;
+    return 0;
+  }
+
+  // 橫幅數量改變時重新建立輪播（替換元素以移除原本的事件與計時器）
+  function initCarousel(html, idx) {
+    var old = document.getElementById('hero-slides');
+    if (!old) return null;
+    var wrap = old.cloneNode(false);
+    wrap.innerHTML = html == null ? old.innerHTML : html;
+    old.parentNode.replaceChild(wrap, old);
+    bindDriveFallback(wrap);
+    function swap(id, deep) {
+      var o = document.getElementById(id);
+      if (!o) return null;
+      var n = o.cloneNode(deep);
+      o.parentNode.replaceChild(n, o);
+      return n;
+    }
+    var dotsWrap = swap('carousel-dots', false);
+    var prev = swap('carousel-prev', true);
+    var next = swap('carousel-next', true);
+    var slides = wrap.querySelectorAll('.hero__slide');
+    var n = slides.length, current = 0, timer = null;
+    if (api.carousel) api.carousel.stop();
+    var autoplay = api.autoplay !== false;
+
+    function restart() {
+      clearInterval(timer);
+      if (autoplay && n > 1) timer = setInterval(function () { goTo(current + 1); }, 5000);
+    }
+    function goTo(i) {
+      if (!n) return;
+      if (slides[current]) slides[current].removeAttribute('aria-current');
+      current = (i + n) % n;
+      wrap.style.transform = 'translateX(-' + current * 100 + '%)';
+      if (dotsWrap) Array.prototype.forEach.call(dotsWrap.children, function (d, j) {
+        d.classList.toggle('active', j === current);
+        d.setAttribute('aria-selected', String(j === current));
+      });
+      slides[current].setAttribute('aria-current', 'true');
+      restart();
+      if (api.onSlide) api.onSlide(current, n);
+    }
+    if (dotsWrap) Array.prototype.forEach.call(slides, function (_, i) {
+      var dot = document.createElement('button');
+      dot.className = 'hero__dot';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', '第 ' + (i + 1) + ' 張');
+      dot.addEventListener('click', function () { goTo(i); });
+      dotsWrap.appendChild(dot);
+    });
+    if (prev) prev.addEventListener('click', function () { goTo(current - 1); });
+    if (next) next.addEventListener('click', function () { goTo(current + 1); });
+    wrap.addEventListener('mouseenter', function () { clearInterval(timer); });
+    wrap.addEventListener('mouseleave', restart);
+    wrap.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+    api.carousel = {
+      goTo: goTo, count: n,
+      current: function () { return current; },
+      stop: function () { clearInterval(timer); autoplay = false; }
+    };
+    goTo(Math.max(0, Math.min(idx || 0, n - 1)));
+    return wrap;
+  }
+
+  function writeSlides(f, value) {
+    if (f.rendered === undefined) f.rendered = f.defaultValue;
+    if (value === f.rendered) return;
+    var list = parseSlides(value);
+    var html = list && slidesHTML(list);
+    if (!html) return;
+    f.rendered = value;
+    if (document.readyState === 'loading') { // 頁面腳本尚未執行，直接替換即可
+      f.el.innerHTML = html;
+      bindDriveFallback(f.el);
+    } else {
+      var idx = api.nextSlide != null ? api.nextSlide : currentSlide();
+      api.nextSlide = null;
+      f.el = initCarousel(html, idx) || f.el;
+    }
+  }
+
+  // 6. 將資料套用到畫面（只更新有變動的欄位，避免重繪）
   function write(f, value) {
     if (value == null) value = f.defaultValue;
+    if (f.type === 'slides') return writeSlides(f, value);
     if (f.type === 'text') {
       var html = value === f.defaultValue ? value : sanitize(value); // 原始 HTML 不需再過濾
       if (f.el.innerHTML.trim() !== html) f.el.innerHTML = html;
@@ -148,10 +287,15 @@
   }
   function apply(fields, values) {
     values = values || {};
-    fields.forEach(function (f) { write(f, Object.prototype.hasOwnProperty.call(values, f.key) ? values[f.key] : null); });
+    fields.forEach(function (f) {
+      var has = Object.prototype.hasOwnProperty.call(values, f.key);
+      var v = has ? values[f.key] : null;
+      if (!has && f.type === 'slides') v = legacySlides(f, values);
+      write(f, v);
+    });
   }
 
-  // 6. 讀取資料庫
+  // 7. 讀取資料庫
   function fetchContent() {
     return fetch(API_URL + '?action=content&t=' + Date.now(), { cache: 'no-store' })
       .then(function (r) { return r.json(); })
@@ -169,7 +313,9 @@
     API_URL: API_URL, GOOGLE_CLIENT_ID: GOOGLE_CLIENT_ID, PAGE_FILES: PAGE_FILES,
     scan: scan, read: read, write: write, apply: apply, sanitize: sanitize,
     imageUrl: imageUrl, driveId: driveId, safeImageUrl: safeImageUrl,
-    fetchContent: fetchContent, readCache: readCache, page: null, fields: []
+    fetchContent: fetchContent, readCache: readCache, page: null, fields: [],
+    parseSlides: parseSlides, legacySlides: legacySlides, initCarousel: initCarousel, currentSlide: currentSlide,
+    carousel: null, autoplay: true, nextSlide: null, onSlide: null
   };
   window.WuguCMS = api;
 
@@ -179,7 +325,8 @@
   api.fields = scan();
 
   if (isAdminFrame) {
-    // 後台預覽：交由後台套用資料與草稿
+    // 後台預覽：交由後台套用資料與草稿；橫幅不自動輪播
+    api.autoplay = false;
     if (window.parent !== window && window.parent.WuguCMSAdmin) window.parent.WuguCMSAdmin.onFrameReady(window);
     return;
   }
