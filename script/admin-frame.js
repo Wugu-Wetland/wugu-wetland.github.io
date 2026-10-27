@@ -30,12 +30,12 @@
       'transition:outline-color .2s,background-color .2s,box-shadow .2s}',
     '[data-cms-zone]:hover [data-cms-edit="text"],html.cms-show-all [data-cms-edit="text"]{outline-color:rgba(' + G + ',.28)}',
     '[data-cms-edit="text"]:hover{outline:1px solid rgba(' + G + ',.6);background-color:rgba(122,158,110,.08)}',
-    '[data-cms-edit="text"]:focus{outline:2px solid #405935;background-color:rgba(255,255,255,.88);box-shadow:0 0 0 7px rgba(' + G + ',.12)}',
+    '[data-cms-edit="text"]:focus{outline:2px solid #405935;box-shadow:0 0 0 7px rgba(' + G + ',.12)}',
     '[data-cms-edit="text"]:empty::before{content:"點擊輸入文字…";opacity:.4}',
     '[data-cms-edit="text"]::selection,[data-cms-edit="text"] *::selection{background:rgba(122,158,110,.35)}',
-    // 已修改但尚未儲存：左側橘色細條
-    '[data-cms-changed][data-cms-edit="text"]{box-shadow:-9px 0 0 -6px #d97706}',
-    '[data-cms-changed][data-cms-edit="text"]:focus{box-shadow:-9px 0 0 -6px #d97706,0 0 0 7px rgba(' + G + ',.12)}',
+    // 已修改但尚未儲存：橘色實線框（與可編輯虛線框位置相同，且常駐顯示）
+    '[data-cms-changed][data-cms-edit="text"]{outline:1px solid #d97706 !important}',
+    '[data-cms-changed][data-cms-edit="text"]:focus{outline-width:2px !important;box-shadow:0 0 0 7px rgba(217,119,6,.12)}',
     // 圖片與地圖標記
     '[data-cms-edit="img"],#hero-slides{cursor:pointer;transition:filter .2s}',
     '[data-cms-edit="img"]:hover,#hero-slides:hover{filter:brightness(.88)}',
