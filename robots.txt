@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /management
+Disallow: /cms-setup/*
 
 
 Sitemap: https://wugu-wetland.github.io/sitemap.xml
