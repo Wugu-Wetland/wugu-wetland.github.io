@@ -88,11 +88,15 @@
     $('adm-login').hidden = false;
     $('adm-login-error').textContent = message || '';
     if (CMS.GOOGLE_CLIENT_ID) {
+      if (location.protocol !== 'https:' && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+        return googleError('目前網址為 ' + location.protocol + '//，Google 登入需要 https://。請改用 https:// 開啟此頁，或至 GitHub Pages 設定勾選 Enforce HTTPS。');
+      }
       if (window.google && google.accounts) return renderGoogle();
       var s = document.createElement('script');
       s.src = 'https://accounts.google.com/gsi/client';
       s.async = true;
       s.onload = renderGoogle;
+      s.onerror = function () { googleError('無法載入 Google 登入元件，請確認網路連線，或關閉會阻擋 accounts.google.com 的擴充功能。'); };
       document.head.appendChild(s);
     } else {
       $('adm-password-form').hidden = false;
@@ -106,6 +110,18 @@
       callback: function (res) { doLogin({ idToken: res.credential }); }
     });
     google.accounts.id.renderButton($('adm-google-btn'), { theme: 'outline', size: 'large', text: 'signin_with', locale: 'zh-TW' });
+    // 來源未授權時 Google 不會回報錯誤，按鈕只會是一片空白；逾時仍未出現就提示原因
+    setTimeout(function () {
+      var frame = $('adm-google-btn').querySelector('iframe');
+      if (!frame || frame.getBoundingClientRect().height < 10) {
+        googleError('Google 登入按鈕未能顯示。請到 Google Cloud Console 的 OAuth 用戶端，' +
+          '在「已授權的 JavaScript 來源」加入「' + location.origin + '」（設定後可能需等待數分鐘生效）。');
+      }
+    }, 4000);
+  }
+
+  function googleError(msg) {
+    $('adm-login-error').textContent = msg;
   }
 
   $('adm-password-form').addEventListener('submit', function (e) {
@@ -352,20 +368,23 @@
   $('adm-undo').addEventListener('click', undo);
   $('adm-redo').addEventListener('click', redo);
 
-  // 顯示／隱藏所有可編輯範圍（記住偏好）
+  // 顯示／隱藏所有可編輯範圍（記住偏好；按鈕可從 management.html 移除）
   S.showAll = localStorage.getItem('wuguCMS:showAll') === '1';
   function renderShowAll() {
     var b = $('adm-outline');
-    b.classList.toggle('is-active', S.showAll);
-    b.setAttribute('aria-pressed', String(S.showAll));
-    b.querySelector('i').className = 'fa-solid ' + (S.showAll ? 'fa-eye' : 'fa-eye-slash');
+    if (b) {
+      b.classList.toggle('is-active', S.showAll);
+      b.setAttribute('aria-pressed', String(S.showAll));
+      b.querySelector('i').className = 'fa-solid ' + (S.showAll ? 'fa-eye' : 'fa-eye-slash');
+    }
     window.WuguAdminFrame.setShowAll(S.showAll);
   }
-  $('adm-outline').addEventListener('click', function () {
+  if ($('adm-outline')) $('adm-outline').addEventListener('click', function () {
     S.showAll = !S.showAll;
     localStorage.setItem('wuguCMS:showAll', S.showAll ? '1' : '0');
     renderShowAll();
   });
+  if (!$('adm-outline')) S.showAll = false;
   renderShowAll();
   $('adm-cancel').addEventListener('click', function () {
     dialog('取消所有變更？', '<p>此頁面 ' + Object.keys(S.draft).length + ' 項尚未儲存的變更將被捨棄，並恢復為資料庫中的內容。</p>', [
