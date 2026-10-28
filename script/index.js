@@ -93,38 +93,79 @@
       return data;
     }
 
-    fetch(SHEET_CSV_URL)
-      .then(function(res) { return res.text(); })
-      .then(function(csv) {
-        var events = parseEventCSV(csv);
-        events = events.slice(0, 3);
-        newsList.style.opacity = '0';
-        setTimeout(function() {
-          if (events.length === 0) {
-            newsList.innerHTML = '<li class="news-item"><p class="news-item__title">目前沒有活動消息</p></li>';
-          } else {
-            newsList.innerHTML = events.map(function(evt) {
-              var title  = evt['活動名稱'] || '';
-              var date   = evt['日期'] || '';
-              var type   = evt['類型'] || '';
-              var branch = evt['分會'] || '';
-              var status = evt['狀態'] || '';
-              var link   = evt['連結'] || '#';
-              var desc   = [type].filter(function(s) { return s; }).join(' · ');
-              return '<li class="news-item">' +
-                '<a href="' + link + '" target="_blank" style="display:block;text-decoration:none;color:inherit;" aria-label="' + title + '">' +
-                  '<p class="news-item__title">' + title +
-                    ' <br><br><span class="news-item__meta" style="font-weight:400;"><b>｜時間：</b>' + date + '</span>' +
-                  '</p>' +
-                  '<p class="news-item__desc"><b>｜類型：</b>' + desc + '</p>' +
-                '</a></li>';
-            }).join('');
+    var NEWS_CACHE_KEY = 'wugu:news';
+
+    function renderNews(events) {
+      events = events.slice(0, 3);
+      if (events.length === 0) {
+        newsList.innerHTML = '<li class="news-item"><p class="news-item__title">目前沒有活動消息</p></li>';
+        return;
+      }
+      newsList.innerHTML = events.map(function(evt) {
+        var title  = evt['活動名稱'] || '';
+        var date   = evt['日期'] || '';
+        var type   = evt['類型'] || '';
+        var link   = evt['連結'] || '#';
+        var desc   = [type].filter(function(s) { return s; }).join(' · ');
+        return '<li class="news-item">' +
+          '<a href="' + link + '" target="_blank" style="display:block;text-decoration:none;color:inherit;" aria-label="' + title + '">' +
+          '<p class="news-item__title">' + title +
+          ' <br><br><span class="news-item__meta" style="font-weight:400;"><b>｜時間：</b>' + date + '</span>' +
+          '</p>' +
+          '<p class="news-item__desc"><b>｜類型：</b>' + desc + '</p>' +
+          '</a></li>';
+      }).join('');
+    }
+
+    function showNews(events) {
+      newsList.style.opacity = '0';
+      setTimeout(function() {
+        renderNews(events);
+        newsList.style.transition = 'opacity 0.4s';
+        newsList.style.opacity = '1';
+      }, 200);
+    }
+
+    // Google 發布的 CSV 會在不同伺服器上快取數分鐘，偶爾拿到空白或舊版本；
+    // 加上隨機參數略過快取，結果為空時再重試一次
+    function loadNewsCSV(attempt) {
+      var url = SHEET_CSV_URL + (SHEET_CSV_URL.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now();
+      return fetch(url, { cache: 'no-store' })
+        .then(function(res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.text();
+        })
+        .then(function(csv) {
+          var events = parseEventCSV(csv);
+          if (!events.length && attempt < 2) {
+            return new Promise(function(ok) { setTimeout(ok, 700); }).then(function() { return loadNewsCSV(attempt + 1); });
           }
-          newsList.style.transition = 'opacity 0.4s';
-          newsList.style.opacity = '1';
-        }, 200);
+          return events;
+        }, function(err) {
+          if (attempt < 2) return new Promise(function(ok) { setTimeout(ok, 700); }).then(function() { return loadNewsCSV(attempt + 1); });
+          throw err;
+        });
+    }
+
+    // 先顯示上次成功取得的活動（瞬間呈現），再更新為最新資料
+    var cachedNews = null;
+    try {
+      var stored = JSON.parse(localStorage.getItem(NEWS_CACHE_KEY) || 'null');
+      if (stored && stored.events && stored.events.length) cachedNews = stored;
+    } catch (e) {}
+    if (cachedNews) renderNews(cachedNews.events);
+
+    loadNewsCSV(0)
+      .then(function(events) {
+        if (events.length) {
+          try { localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify({ at: Date.now(), events: events.slice(0, 3) })); } catch (e) {}
+        }
+        // 重試後仍為空：6 小時內曾取得資料就保留畫面，避免因暫時的空白版本而消失
+        if (!events.length && cachedNews && Date.now() - cachedNews.at < 6 * 3600 * 1000) return;
+        showNews(events);
       })
       .catch(function() {
+        if (cachedNews) return;
         newsList.innerHTML = '<li class="news-item"><p class="news-item__title">活動資料載入失敗，請稍後再試</p></li>';
       });
   }
