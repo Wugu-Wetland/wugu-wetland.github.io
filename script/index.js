@@ -8,6 +8,8 @@
     const dotsWrap   = document.getElementById('carousel-dots');
     const prevBtn    = document.getElementById('carousel-prev');
     const nextBtn    = document.getElementById('carousel-next');
+        // 只有一張橫幅時隱藏左右換頁按鈕
+    [prevBtn, nextBtn].forEach(btn => { if (btn) btn.style.display = slides.length > 1 ? '' : 'none'; });
     const ctaBtn     = document.getElementById('hero-cta-btn');
     let current = 0;
     let timer;
@@ -27,6 +29,7 @@
     function goTo(idx) {
       slides[current].removeAttribute('aria-current');
       current = (idx + slides.length) % slides.length;
+      if (current && window.WuguCMS) window.WuguCMS.loadSlides();
       slidesWrap.style.transform = `translateX(-${current * 100}%)`;
       dotsWrap.querySelectorAll('.hero__dot').forEach((d, i) => {
         d.classList.toggle('active', i === current);
@@ -190,4 +193,17 @@
       if (!isFlipped) card.classList.add('is-flipped');
     });
   }
+  // 5. YOUTUBE：點擊後才載入播放器
+  const ytFacade = document.getElementById('yt-facade');
+  if (ytFacade) {
+    ytFacade.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + ytFacade.dataset.ytId + '?autoplay=1&controls=0&showinfo=0&modestbranding=1&fs=0&cc_load_policty=0&iv_load_policy=3&autohide=0';
+      iframe.title = '五股濕地介紹影片';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      ytFacade.replaceWith(iframe);
+    });
+  }
+
 })();

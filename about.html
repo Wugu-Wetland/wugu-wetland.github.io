@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M5FRLNQ05Z"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M5FRLNQ05Z');
 
-    gtag('config', 'G-M5FRLNQ05Z');
-  </script>
+  // 字型與 GA 等首屏大圖畫出來之後才載入，不和最大內容繪製（LCP）搶頻寬
+  (function () {
+    var FONT_CSS = 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap';
+    function addFonts() {
+      var l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.href = FONT_CSS;
+      document.head.appendChild(l);
+    }
+    var cached = false;
+    try { cached = localStorage.getItem('wugu:fonts') === '1'; } catch (e) {}
+    if (cached) addFonts(); // 回訪：字型已在瀏覽器快取，立即套用
+
+    var started = false;
+    function start() {
+      if (started) return;
+      started = true;
+      if (!cached) addFonts();
+      try { localStorage.setItem('wugu:fonts', '1'); } catch (e) {}
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-M5FRLNQ05Z';
+      document.head.appendChild(s);
+    }
+    window.addEventListener('load', function () {
+      setTimeout(start, 4000); // 保險：最多等 4 秒
+      var hero = document.querySelector('.hero__slide img[src]');
+      var ready = hero && hero.decode ? hero.decode().catch(function () {}) : Promise.resolve();
+      ready.then(function () {
+        requestAnimationFrame(function () { setTimeout(start, 500); });
+      });
+    });
+  })();
+</script>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;display=swap" /></noscript>
+  <meta charset="UTF-8" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>關於五股濕地｜五股濕地生態園區</title>
@@ -59,8 +93,7 @@
 
   <!-- 新增：預先載入首屏最關鍵的圖片，提升 LCP 速度 -->
   <!-- 注意：請在後端或打包工具先轉出一份 .webp 檔案 -->
-  <link rel="preload" as="image" href="images/index-slides-1.webp" type="image/webp" fetchpriority="high">
-  <link rel="preconnect" href="https://script.google.com" />
+  <link rel="preconnect" href="https://script.google.com" crossorigin />
   <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin />
 </head>
 <body>
@@ -68,7 +101,7 @@
   <!-- NAVBAR -->
   <header>
     <nav class="navbar" role="navigation" aria-label="主要導覽">
-      <a class="navbar__logo" href="index" aria-label="五股濕地生態園區 首頁">
+      <a class="navbar__logo" href="/" aria-label="五股濕地生態園區 首頁">
         <img src="images/logo-green.webp" alt="" width="200" height="44" />
       </a>
       <div class="navbar__actions">
@@ -81,19 +114,15 @@
     </nav>
 
     <!-- Mobile Drawer -->
-    <div class="nav-drawer" id="nav-drawer" role="menu">
+    <div class="nav-drawer" id="nav-drawer">
       <ul class="nav-drawer__list">
-        <li><a href="index" role="menuitem">首頁</a></li>
-        <li><a href="javascript:void(0)" role="menuitem">關於五股濕地</a></li>
-        <li><a href="environment" role="menuitem">生態環境</a></li>
-        <li><a href="species" role="menuitem">物種介紹</a></li>
-        <li><a href="https://scratch.mit.edu/projects/1315380063/fullscreen/" role="menuitem" target="_blank">互動遊戲</a></li>
-         <!--<li><a href="javascript:void(0)" role="menuitem">特色物種</a></li>-->
-        <!--<li><a href="javascript:void(0)" role="menuitem">棲地工作</a></li>-->
-        <!--<li><a href="javascript:void(0)" role="menuitem">年度時程</a></li>-->
-        <!--<li><a href="javascript:void(0)" role="menuitem">網路相簿</a></li>-->
-        <li class="mobile-only"><a href="https://www.sow.org.tw" role="menuitem" style="border-top: 1px solid var(--clr-light-green); margin-top: 10px;" target="_blank">荒野官網</a></li>
-        <li class="mobile-only"><a href="https://www.sow.org.tw/event/search?title=%E4%BA%94%E8%82%A1&suo_shu_fen_hui_37=592&event_type=All&is_monetary=All" role="menuitem" target="_blank">參與活動</a></li>
+        <li><a href="/">首頁</a></li>
+        <li><a href="about">關於五股濕地</a></li>
+        <li><a href="environment">生態環境</a></li>
+        <li><a href="species">物種介紹</a></li>
+        <li><a href="https://scratch.mit.edu/projects/1315380063/fullscreen/" target="_blank">互動遊戲</a></li>
+        <li class="mobile-only"><a href="https://www.sow.org.tw" style="border-top: 1px solid var(--clr-light-green); margin-top: 10px;" target="_blank">荒野官網</a></li>
+        <li class="mobile-only"><a href="https://www.sow.org.tw/event/search?title=%E4%BA%94%E8%82%A1&suo_shu_fen_hui_37=592&event_type=All&is_monetary=All" target="_blank">參與活動</a></li>
       </ul>
     </div>
   </header>
@@ -348,11 +377,11 @@
     <svg viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M0,110 C 360,130 360,40 720,80 C 1080,120 1080,10 1440,30 L1440,200 L0,200 Z" fill="#E9F0E1"/>
     </svg>
-    <img class="footer__logo" aria-label="五股濕地生態園區 Logo" src="images/logo-green.webp" alt="" loading="lazy" />
+    <img class="footer__logo" src="images/logo-green.webp" alt="五股濕地生態園區 Logo" loading="lazy" />
     <address class="footer__info" style="font-style:normal;">
       <b>地址：</b><a href="https://maps.app.goo.gl/PuJw7zFUjeeEWEgE9" target="_blank">新北市蘆洲區 成蘆大橋下方</a><br />
       <b>信箱：</b><a href="mailto:sowtpe07@wilderness.tw" target="_blank">&nbsp;sowtpe07@wilderness.tw</a><br /><br />
-      <a href="javascript:void(0)">首頁</a>｜<a href="about">關於五股濕地</a>｜<a href="environment">生態環境</a>｜<a href="species">物種介紹</a>｜<a href="https://scratch.mit.edu/projects/1315380063/fullscreen/">互動遊戲</a><br /><br />
+      <a href="/">首頁</a>｜<a href="about">關於五股濕地</a>｜<a href="environment">生態環境</a>｜<a href="species">物種介紹</a>｜<a href="https://scratch.mit.edu/projects/1315380063/fullscreen/">互動遊戲</a><br /><br />
     </address>
     <nav class="footer__socials" aria-label="社群媒體連結">
       <!--Facebook--><a href="https://www.facebook.com/wuguwetland/?locale=zh_TW" class="footer__social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>

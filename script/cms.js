@@ -135,7 +135,7 @@
   // 5. 首頁橫幅：資料為 JSON 清單 [{ src, alt }]
   function readSlides(wrap) {
     return Array.prototype.map.call(wrap.querySelectorAll('.hero__slide img'), function (img) {
-      return { src: img.getAttribute('src') || '', alt: img.getAttribute('alt') || '' };
+      return { src: img.getAttribute('data-src') || img.getAttribute('src') || '', alt: img.getAttribute('alt') || '' };
     });
   }
   function parseSlides(value) {
@@ -144,12 +144,35 @@
   function escAttr(s) {
     return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
   }
+    var SLIDE_WIDTHS = [640, 828, 1280, 1920];
+  function driveSrcset(id) {
+    return SLIDE_WIDTHS.map(function (w) { return 'https://lh3.googleusercontent.com/d/' + id + '=w' + w + '-rw ' + w + 'w'; }).join(', ');
+  }
+  // 比對兩組橫幅是否實質相同（雲端硬碟網址統一轉換後比較）
+  function slidesKey(list) {
+    return JSON.stringify((list || []).map(function (s, i) {
+      return [safeImageUrl(imageUrl(s && s.src)), (s && s.alt) || '輪播圖片 ' + (i + 1)];
+    }));
+  }
+  // 首張以外的橫幅延後下載，避免與首屏圖片搶頻寬
+  function loadSlides() {
+    Array.prototype.forEach.call(document.querySelectorAll(SLIDES + ' img[data-src]'), function (img) {
+      if (img.hasAttribute('data-srcset')) {
+        img.setAttribute('srcset', img.getAttribute('data-srcset'));
+        img.removeAttribute('data-srcset');
+      }
+      img.setAttribute('src', img.getAttribute('data-src'));
+      img.removeAttribute('data-src');
+    });
+  }
   function slidesHTML(list) {
     return list.filter(function (s) { return s && safeImageUrl(imageUrl(s.src)); }).map(function (s, i) {
       var id = driveId(s.src);
       return '<div class="hero__slide" role="tabpanel" aria-label="輪播圖片 ' + (i + 1) + '">' +
-        '<img src="' + escAttr(safeImageUrl(imageUrl(s.src))) + '" alt="' + escAttr(s.alt || '輪播圖片 ' + (i + 1)) + '"' +
-        (i ? ' loading="lazy"' : '') + (id ? ' data-drive-id="' + id + '"' : '') + '>' +
+        '<img ' + (i ? 'data-src' : 'src') + '="' + escAttr(safeImageUrl(imageUrl(s.src))) + '"' +
+        (id ? ' ' + (i ? 'data-srcset' : 'srcset') + '="' + driveSrcset(id) + '" sizes="100vw" data-drive-id="' + id + '"' : '') +
+        (i ? '' : ' fetchpriority="high"') +
+        ' alt="' + escAttr(s.alt || '輪播圖片 ' + (i + 1)) + '">' +
         '<div class="hero__overlay"></div></div>';
     }).join('');
   }
@@ -157,6 +180,7 @@
     Array.prototype.forEach.call(root.querySelectorAll('img[data-drive-id]'), function (img) {
       img.onerror = function () {
         this.onerror = null;
+        this.removeAttribute('srcset');
         this.src = 'https://drive.google.com/thumbnail?id=' + this.getAttribute('data-drive-id') + '&sz=w1920';
       };
     });
@@ -199,6 +223,8 @@
     var next = swap('carousel-next', true);
     var slides = wrap.querySelectorAll('.hero__slide');
     var n = slides.length, current = 0, timer = null;
+    // 只有一張橫幅時隱藏左右換頁按鈕（張數變動時會重新判斷）
+    [prev, next].forEach(function (b) { if (b) b.style.display = n > 1 ? '' : 'none'; });
     if (api.carousel) api.carousel.stop();
     var autoplay = api.autoplay !== false;
 
@@ -210,6 +236,7 @@
       if (!n) return;
       if (slides[current]) slides[current].removeAttribute('aria-current');
       current = (i + n) % n;
+      if (current) loadSlides();
       wrap.style.transform = 'translateX(-' + current * 100 + '%)';
       if (dotsWrap) Array.prototype.forEach.call(dotsWrap.children, function (d, j) {
         d.classList.toggle('active', j === current);
@@ -248,6 +275,8 @@
     if (f.rendered === undefined) f.rendered = f.defaultValue;
     if (value === f.rendered) return;
     var list = parseSlides(value);
+    // 與目前畫面實質相同（HTML 預設值已和資料庫一致）時不重建，避免重複下載
+    if (list && slidesKey(list) === slidesKey(parseSlides(f.rendered))) { f.rendered = value; return; }
     var html = list && slidesHTML(list);
     if (!html) return;
     f.rendered = value;
@@ -258,6 +287,7 @@
       var idx = api.nextSlide != null ? api.nextSlide : currentSlide();
       api.nextSlide = null;
       f.el = initCarousel(html, idx) || f.el;
+      if (document.readyState === 'complete') loadSlides();
     }
   }
 
@@ -310,6 +340,7 @@
   }
 
   var api = {
+    loadSlides: loadSlides,
     API_URL: API_URL, GOOGLE_CLIENT_ID: GOOGLE_CLIENT_ID, PAGE_FILES: PAGE_FILES,
     scan: scan, read: read, write: write, apply: apply, sanitize: sanitize,
     imageUrl: imageUrl, driveId: driveId, safeImageUrl: safeImageUrl,
@@ -323,6 +354,10 @@
 
   api.page = detectPage();
   api.fields = scan();
+  var heroWrap = document.querySelector(SLIDES);
+    if (heroWrap) bindDriveFallback(heroWrap);
+    if (document.readyState === 'complete') loadSlides(); else window.addEventListener('load', loadSlides);
+
 
   if (isAdminFrame) {
     // 後台預覽：交由後台套用資料與草稿；橫幅不自動輪播
